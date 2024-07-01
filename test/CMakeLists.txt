@@ -1,3 +1,8 @@
+# Locate GTest
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+# Include
 include(GoogleTest)
 
 # Generate Test Files
