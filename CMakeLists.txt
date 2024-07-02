@@ -19,8 +19,12 @@ FetchContent_Declare(
     GIT_TAG        2.6.1
     GIT_PROGRESS   TRUE
 )
-fetchcontent_makeavailable(SFML)
 include_directories(${SFML_SOURCE_DIR}/include)
+FetchContent_GetProperties(sfml)
+if(NOT sfml_POPULATED)
+  FetchContent_Populate(sfml)
+  add_subdirectory(${sfml_SOURCE_DIR} ${sfml_BINARY_DIR})
+endif()
 
 # Include Header Files
 include_directories(include)
