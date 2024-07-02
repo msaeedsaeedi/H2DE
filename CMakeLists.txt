@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.22)
 project(H2DE VERSION 0.01 DESCRIPTION "Harmony 2D Engine" LANGUAGES CXX)
 
-# Set C++ standard
+# Set Environment Variables
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(BUILD_SHARED_LIBS OFF)
+set(BUILD_EXAMPLES OFF)
+set(BUILD_TESTS OFF)
 
 # Include FetchContent
 include(FetchContent)
