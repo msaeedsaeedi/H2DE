@@ -28,6 +28,7 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/hyperrealm/libconfig.git
   GIT_TAG        v1.7.3
 )
+set(BUILD_EXAMPLES OFF)
 FetchContent_MakeAvailable(libconfig)
 
 # Include Header Files
