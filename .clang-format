@@ -9,14 +9,16 @@ BreakBeforeBinaryOperators: None
 AllowShortIfStatementsOnASingleLine: false
 BreakBeforeBraces: Custom
 BraceWrapping:
-  AfterClass: false
+  AfterClass: true
   AfterControlStatement: false
   AfterEnum: false
   AfterFunction: false
-  AfterNamespace: false
+  AfterNamespace: true
   AfterStruct: false
   AfterUnion: false
   BeforeCatch: false
   BeforeElse: false
   IndentBraces: false
 SpaceBeforeParens: ControlStatements
+NamespaceIndentation: All
+IndentAccessModifiers: true
