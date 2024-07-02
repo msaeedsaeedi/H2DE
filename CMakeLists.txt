@@ -20,11 +20,7 @@ FetchContent_Declare(
     GIT_PROGRESS   TRUE
 )
 include_directories(${SFML_SOURCE_DIR}/include)
-FetchContent_GetProperties(sfml)
-if(NOT sfml_POPULATED)
-  FetchContent_Populate(sfml)
-  add_subdirectory(${sfml_SOURCE_DIR} ${sfml_BINARY_DIR})
-endif()
+FetchContent_MakeAvailable(sfml)
 
 # Install Libconfig++
 FetchContent_Declare(
