@@ -5,31 +5,10 @@ project(H2DE VERSION 0.01 DESCRIPTION "Harmony 2D Engine" LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(BUILD_SHARED_LIBS OFF)
-set(BUILD_EXAMPLES OFF)
-set(BUILD_TESTS OFF)
 
-# Include FetchContent
-include(FetchContent)
-Set(FETCHCONTENT_QUIET FALSE)
-
-# Install SFML
-FetchContent_Declare(
-    SFML
-    GIT_REPOSITORY https://github.com/SFML/SFML
-    GIT_TAG        2.6.1
-    GIT_PROGRESS   TRUE
-)
-include_directories(${SFML_SOURCE_DIR}/include)
-FetchContent_MakeAvailable(sfml)
-
-# Install Libconfig++
-FetchContent_Declare(
-  libconfig
-  GIT_REPOSITORY https://github.com/hyperrealm/libconfig.git
-  GIT_TAG        v1.7.3
-)
-set(BUILD_EXAMPLES OFF)
-FetchContent_MakeAvailable(libconfig)
+# Install Packages
+find_package(SFML 2.6.1 COMPONENTS graphics window system REQUIRED)
+find_package(libconfig REQUIRED)
 
 # Include Header Files
 include_directories(include)
