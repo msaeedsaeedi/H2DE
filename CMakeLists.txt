@@ -26,6 +26,14 @@ if(NOT sfml_POPULATED)
   add_subdirectory(${sfml_SOURCE_DIR} ${sfml_BINARY_DIR})
 endif()
 
+# Install Libconfig++
+FetchContent_Declare(
+  libconfig
+  GIT_REPOSITORY https://github.com/hyperrealm/libconfig.git
+  GIT_TAG        v1.7.3
+)
+FetchContent_MakeAvailable(libconfig)
+
 # Include Header Files
 include_directories(include)
 
@@ -43,12 +51,14 @@ target_link_libraries(${PROJECT_NAME}
         sfml-graphics
         sfml-window
         sfml-system
+        config++
 )
 
 # Include Directories in the target
 target_include_directories(${PROJECT_NAME}
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${libconfig_SOURCE_DIR}/lib
 )
 
 # Set output directory
