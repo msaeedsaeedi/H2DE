@@ -5,6 +5,8 @@
 
 namespace H2DE
 {
+    class Game;
+
     class Engine
     {
         private:
@@ -16,9 +18,10 @@ namespace H2DE
             ~Engine();
 
             void init(const std::string& config_file);
+            void set_game(const std::shared_ptr<Game>& game);
             void run();
 
-        public:
+        private:
+            void validate_requirements();
     };
-
 }  // namespace H2DE
