@@ -20,6 +20,7 @@ void H2DE::SceneManager::change_scene(const std::string& name) {
         throw H2DE::SceneException("Scene '" + name + "' not found");
     }
     m_current_scene = m_scenes[name];
+    m_current_scene->init();
 }
 
 void H2DE::SceneManager::remove_scene(const std::string& name) {
