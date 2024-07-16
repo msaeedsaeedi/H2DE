@@ -29,8 +29,8 @@ void H2DE::Engine::init(const std::string& config_file) {
 
         m_impl->m_fps = fps;
         m_impl->m_window.create(sf::VideoMode(width, height), title);
-    } catch (const std::exception& e) {
-        std::cerr << "H2DE: " << e.what() << std::endl;
+    } catch (const H2DE::H2DEException& e) {
+        std::cerr << "[H2DE]: " << e.what() << std::endl;
     }
 }
 
