@@ -28,7 +28,7 @@ install_from_github() {
 
     echo "Creating build directory for $dir_name..."
     cd $dir_name
-    mkdir build
+    mkdir -p build
     cd build
 
     echo "Configuring the build for $dir_name with CMake..."
@@ -49,7 +49,7 @@ SFML_VERSION="2.6.1"
 SFML_REPO="https://github.com/SFML/SFML.git"
 
 # Variables for libconfig
-LIBCONFIG_VERSION="1.7.3"  # You might need to check the latest version if it's not specified in the repository
+LIBCONFIG_VERSION="1.7.3"
 LIBCONFIG_REPO="https://github.com/hyperrealm/libconfig.git"
 LIBCONFIG_PACKAGE_NAME="libconfig"
 
