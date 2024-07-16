@@ -11,7 +11,8 @@ find_package(SFML 2.6.1 COMPONENTS graphics window system REQUIRED)
 find_package(libconfig REQUIRED)
 
 # Include Header Files
-include_directories(include)
+include_directories(include/public)
+include_directories(include/private)
 
 # Source Files
 file(GLOB_RECURSE SOURCES "src/*.cpp")
@@ -33,8 +34,10 @@ target_link_libraries(${PROJECT_NAME}
 # Include Directories in the target
 target_include_directories(${PROJECT_NAME}
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/public
         ${libconfig_SOURCE_DIR}/lib
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/private
 )
 
 # Set output directory
