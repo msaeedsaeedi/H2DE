@@ -30,7 +30,7 @@ void H2DE::Engine::init(const std::string& config_file) {
 
         m_impl->m_window.create(sf::VideoMode(width, height), title);
     } catch (const H2DE::H2DEException& e) {
-        std::cerr << "[H2DE]: " << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
         H2DE::Engine::exit();
     }
 }
@@ -56,7 +56,7 @@ void H2DE::Engine::run() {
             m_impl->m_window.display();
         }
     } catch (const H2DE::H2DEException& e) {
-        std::cerr << "[H2DE]: " << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
         H2DE::Engine::exit();
     }
 }

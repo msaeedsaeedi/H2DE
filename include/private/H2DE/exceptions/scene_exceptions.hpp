@@ -7,7 +7,7 @@ namespace H2DE
     {
         public:
             SceneException(const std::string& message)
-                : H2DE::H2DEException("Scene Exception\n\t" + message) {
+                : H2DE::H2DEException("Scene Exception", "Error: " + message) {
             }
     };
 }  // namespace H2DE
