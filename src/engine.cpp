@@ -1,67 +1,69 @@
 #include "H2DE/engine.hpp"
 
 #include <SFML/Graphics.hpp>
+#include <chrono>
 #include <iostream>
 
-#include "H2DE/game.hpp"
+#include "H2DE/scene_manager.hpp"
 #include "H2DE/utils/readconfig.hpp"
 
 struct H2DE::Engine::Impl {
         sf::RenderWindow m_window;
-        std::shared_ptr<Game> m_game;
+        uint16_t m_fps;
 };
 
+std::unique_ptr<H2DE::Engine::Impl> H2DE::Engine::m_impl =
+    std::make_unique<H2DE::Engine::Impl>();
+
 H2DE::Engine::Engine() {
-    m_impl = std::make_unique<Impl>();
 }
 
 void H2DE::Engine::init(const std::string& config_file) {
     try {
         utils::read_config config(config_file);
 
-        int width = config.get<int>("window.width");
-        int height = config.get<int>("window.height");
+        uint16_t width = config.get<int32_t>("window.width");
+        uint16_t height = config.get<int32_t>("window.height");
+        uint16_t fps = config.get<int32_t>("window.fps");
         std::string title = config.get<std::string>("window.title");
 
+        m_impl->m_fps = fps;
         m_impl->m_window.create(sf::VideoMode(width, height), title);
     } catch (const std::exception& e) {
         std::cerr << "H2DE: " << e.what() << std::endl;
     }
 }
 
-void H2DE::Engine::set_game(const std::shared_ptr<Game>& game) {
-    try {
-        m_impl->m_game = std::move(game);
-    } catch (const std::exception& e) {
-        std::cerr << "H2DE: " << e.what() << std::endl;
-    }
-}
-
 void H2DE::Engine::run() {
-    try {
-        validate_requirements();
+    const std::chrono::duration<double> frame_duration(1.0 / m_impl->m_fps);
+    auto previous_time = std::chrono::high_resolution_clock::now();
+    while (m_impl->m_window.isOpen()) {
+        auto current_time = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<float> delta_time = current_time - previous_time;
+        if (delta_time.count() < frame_duration.count())
+            continue;
+        previous_time = current_time;
 
-        while (m_impl->m_window.isOpen()) {
-            sf::Event event;
-            while (m_impl->m_window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed) {
-                    m_impl->m_window.close();
-                }
-            }
+        auto current_scene = SceneManager::get_current_scene();
 
-            m_impl->m_game->update();
-            m_impl->m_window.clear();
-            m_impl->m_window.display();
+        process_events();
+        current_scene->update(delta_time.count());
+        m_impl->m_window.clear();
+        current_scene->render();
+        m_impl->m_window.display();
+    }
+}
+
+void H2DE::Engine::exit() {
+    m_impl->m_window.close();
+}
+
+void H2DE::Engine::process_events() {
+    sf::Event event;
+    while (m_impl->m_window.pollEvent(event)) {
+        if (event.type == sf::Event::Closed) {
+            m_impl->m_window.close();
         }
-    } catch (const std::exception& e) {
-        std::cerr << "H2DE: " << e.what() << std::endl;
     }
 }
-
-void H2DE::Engine::validate_requirements() {
-    if (not m_impl->m_game) {
-        throw std::logic_error("No Game Instance Found!");
-    }
-}
-
 H2DE::Engine::~Engine() = default;
