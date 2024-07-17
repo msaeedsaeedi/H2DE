@@ -8,6 +8,5 @@ namespace H2DE
             virtual ~Scene() = default;
             virtual void init() = 0;
             virtual void update(const float delta) = 0;
-            virtual void render() = 0;
     };
 }  // namespace H2DE
