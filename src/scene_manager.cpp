@@ -11,8 +11,10 @@ void H2DE::SceneManager::add_scene(const std::string& name,
     if (m_scenes.find(name) != m_scenes.end())
         throw H2DE::SceneException("Scene `" + name + "` already exists");
     m_scenes[name] = scene;
-    if (m_current_scene == nullptr)
+    if (m_current_scene == nullptr) {
         m_current_scene = scene;
+        m_current_scene->init();
+    }
 }
 
 void H2DE::SceneManager::change_scene(const std::string& name) {
