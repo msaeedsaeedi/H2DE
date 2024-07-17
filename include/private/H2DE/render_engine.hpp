@@ -1,11 +1,10 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
 #include <memory>
 #include <vector>
 
 #include "H2DE/object.hpp"
-#include <SFML/Graphics.hpp>
-
 
 namespace H2DE
 {
@@ -14,7 +13,9 @@ namespace H2DE
     {
         public:
             RenderEngine();
-            void init(uint16_t height, uint16_t width, const std::string& title);
+            ~RenderEngine();
+            void init(uint16_t height, uint16_t width, const std::string& title,
+                      bool full_screen);
             void render(const Objects_t& objects) const;
 
         private:
