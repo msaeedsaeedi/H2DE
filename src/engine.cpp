@@ -32,7 +32,7 @@ void H2DE::Engine::init(const std::string& config_file) {
 
         m_impl->m_window = std::make_shared<sf::RenderWindow>();
         m_impl->m_window->create(sf::VideoMode(width, height), title);
-        m_impl->m_render_engine.set_window(m_impl->m_window);
+        m_impl->m_render_engine.set_window();
     } catch (const H2DE::H2DEException& e) {
         std::cerr << e.what() << std::endl;
         H2DE::Engine::exit();

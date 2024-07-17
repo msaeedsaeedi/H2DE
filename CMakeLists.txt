@@ -4,15 +4,13 @@ project(H2DE VERSION 0.01 DESCRIPTION "Harmony 2D Engine" LANGUAGES CXX)
 # Set Environment Variables
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(BUILD_EXAMPLES OFF)
+set(BUILD_TESTS OFF)
 set(BUILD_SHARED_LIBS OFF)
 
 # Install Packages
-find_package(SFML 2.6.1 COMPONENTS graphics window system REQUIRED)
-find_package(libconfig REQUIRED)
-
-# Include Header Files
-include_directories(include/public)
-include_directories(include/private)
+add_subdirectory(external/SFML)
+add_subdirectory(external/libconfig)
 
 # Source Files
 file(GLOB_RECURSE SOURCES "src/*.cpp")
@@ -35,8 +33,9 @@ target_link_libraries(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME}
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include/public
-        ${libconfig_SOURCE_DIR}/lib
     PRIVATE
+        ${libconfig_SOURCE_DIR}/lib
+        ${SFML_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/private
 )
 
