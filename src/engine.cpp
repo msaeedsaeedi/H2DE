@@ -9,9 +9,10 @@
 #include "H2DE/utils/readconfig.hpp"
 
 struct H2DE::Engine::Impl {
-        std::shared_ptr<sf::RenderWindow> m_window;
+        bool m_running = false;
         uint16_t m_fps;
-        RenderEngine m_render_engine;
+        std::shared_ptr<RenderEngine> m_render_engine;
+        Objects_t m_objects;
 };
 
 std::unique_ptr<H2DE::Engine::Impl> H2DE::Engine::m_impl =
@@ -28,11 +29,9 @@ void H2DE::Engine::init(const std::string& config_file) {
         uint16_t height = config.get<int32_t>("window.height");
         uint16_t fps = config.get<int32_t>("window.fps");
         std::string title = config.get<std::string>("window.title");
-        m_impl->m_fps = fps;
 
-        m_impl->m_window = std::make_shared<sf::RenderWindow>();
-        m_impl->m_window->create(sf::VideoMode(width, height), title);
-        m_impl->m_render_engine.set_window();
+        m_impl->m_fps = fps;
+        m_impl->m_render_engine->init(height, width, title);
     } catch (const H2DE::H2DEException& e) {
         std::cerr << e.what() << std::endl;
         H2DE::Engine::exit();
@@ -43,7 +42,7 @@ void H2DE::Engine::run() {
     try {
         const std::chrono::duration<double> frame_duration(1.0 / m_impl->m_fps);
         auto previous_time = std::chrono::high_resolution_clock::now();
-        while (m_impl->m_window->isOpen()) {
+        while (m_impl->m_running) {
             auto current_time = std::chrono::high_resolution_clock::now();
             std::chrono::duration<float> delta_time =
                 current_time - previous_time;
@@ -55,9 +54,7 @@ void H2DE::Engine::run() {
 
             process_events();
             current_scene->update(delta_time.count());
-            m_impl->m_window->clear();
-            current_scene->render(m_impl->m_render_engine);
-            m_impl->m_window->display();
+            m_impl->m_render_engine->render(m_impl->m_objects);
         }
     } catch (const H2DE::H2DEException& e) {
         std::cerr << e.what() << std::endl;
@@ -66,15 +63,11 @@ void H2DE::Engine::run() {
 }
 
 void H2DE::Engine::exit() {
-    m_impl->m_window->close();
+    m_impl->m_running = false;
 }
 
 void H2DE::Engine::process_events() {
-    sf::Event event;
-    while (m_impl->m_window->pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            m_impl->m_window->close();
-        }
-    }
+
 }
+
 H2DE::Engine::~Engine() = default;
