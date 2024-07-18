@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -12,13 +13,15 @@ namespace H2DE
     class ObjectManager
     {
         private:
-            static objects_t m_objects;
+            friend class Scene;
+
+            objects_t m_objects;
+            ObjectManager() = default;
 
         public:
-            static object_t& add_object(uint32_t id);
-            static object_t& get_object(uint32_t id);
-            static void remove_object(uint32_t id);
-            static void clear_objects();
-            static objects_t& get_objects();
+            object_t& add_object(uint32_t id);
+            object_t& get_object(uint32_t id);
+            void remove_object(uint32_t id);
+            objects_t& get_all();
     };
 };  // namespace H2DE

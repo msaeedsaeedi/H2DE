@@ -4,8 +4,6 @@
 
 #include "H2DE/exceptions/exceptions.hpp"
 
-H2DE::objects_t H2DE::ObjectManager::m_objects;
-
 H2DE::object_t& H2DE::ObjectManager::add_object(uint32_t id) {
     m_objects.push_back(std::shared_ptr<Object>(new Object(id)));
     return m_objects.back();
@@ -33,9 +31,6 @@ void H2DE::ObjectManager::remove_object(uint32_t id) {
     }
 }
 
-void H2DE::ObjectManager::clear_objects() {
-    m_objects.clear();
-}
-H2DE::objects_t& H2DE::ObjectManager::get_objects() {
+H2DE::objects_t& H2DE::ObjectManager::get_all() {
     return m_objects;
 }
