@@ -10,6 +10,11 @@ namespace H2DE
 {
     class SceneManager
     {
+        private:
+            SceneManager() = delete;
+            SceneManager(const SceneManager&) = delete;
+            SceneManager& operator=(const SceneManager&) = delete;
+
         public:
             static void add_scene(const std::string& name,
                                   const std::shared_ptr<Scene>& scene);
