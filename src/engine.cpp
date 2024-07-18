@@ -6,11 +6,12 @@
 #include "H2DE/scene_manager.hpp"
 #include "H2DE/utils/readconfig.hpp"
 
-struct H2DE::Engine::Impl {
+using namespace H2DE;
+
+struct Engine::Impl {
         bool m_running = false;
         uint16_t m_fps;
         std::unique_ptr<RenderEngine> m_render_engine;
-        Objects_t m_objects;
 };
 
 std::unique_ptr<H2DE::Engine::Impl>& H2DE::Engine::getImpl() noexcept {
@@ -18,7 +19,7 @@ std::unique_ptr<H2DE::Engine::Impl>& H2DE::Engine::getImpl() noexcept {
     return m_impl;
 }
 
-void H2DE::Engine::init(const std::string& config_file) {
+void Engine::init(const std::string& config_file) {
     getImpl()->m_render_engine = std::make_unique<RenderEngine>();
     utils::read_config config(config_file);
 
@@ -33,7 +34,7 @@ void H2DE::Engine::init(const std::string& config_file) {
     getImpl()->m_running = true;
 }
 
-void H2DE::Engine::run() {
+void Engine::run() {
     const std::chrono::duration<double> frame_duration(1.0 / getImpl()->m_fps);
     auto previous_time = std::chrono::high_resolution_clock::now();
     while (getImpl()->m_running) {
@@ -47,14 +48,14 @@ void H2DE::Engine::run() {
 
         process_events();
         current_scene->update(delta_time.count());
-        getImpl()->m_render_engine->render(getImpl()->m_objects);
+        getImpl()->m_render_engine->render();
     }
 }
-void H2DE::Engine::exit() {
+void Engine::exit() {
     getImpl()->m_running = false;
 }
 
-void H2DE::Engine::process_events() {
+void Engine::process_events() {
 }
 
-H2DE::Engine::~Engine() = default;
+Engine::~Engine() = default;

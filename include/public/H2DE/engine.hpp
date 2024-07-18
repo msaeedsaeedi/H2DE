@@ -8,7 +8,6 @@
 
 namespace H2DE
 {
-    using Objects_t = std::vector<std::unique_ptr<Object>>;
     class Engine
     {
         private:
