@@ -3,14 +3,8 @@
 #include "H2DE/asset_manager.hpp"
 #include "H2DE/scene_manager.hpp"
 
-H2DE::RenderEngine::RenderEngine()
-    : m_window(std::make_unique<sf::RenderWindow>()) {
-}
-
-void H2DE::RenderEngine::init(uint16_t height, uint16_t width,
-                              const std::string &title, bool full_screen) {
-    this->m_window->create(sf::VideoMode(width, height), title,
-                           (full_screen) ? (sf::Style::Fullscreen) : 7U);
+H2DE::RenderEngine::RenderEngine(std::shared_ptr<sf::RenderWindow> window)
+    : m_window(window) {
 }
 
 void H2DE::RenderEngine::render() const {

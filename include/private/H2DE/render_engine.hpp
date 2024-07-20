@@ -11,13 +11,12 @@ namespace H2DE
     class RenderEngine
     {
         public:
-            RenderEngine();
+            RenderEngine() = default;
+            RenderEngine(std::shared_ptr<sf::RenderWindow> window);
             ~RenderEngine();
-            void init(uint16_t height, uint16_t width, const std::string& title,
-                      bool full_screen);
             void render() const;
 
         private:
-            std::unique_ptr<sf::RenderWindow> m_window;
+            std::shared_ptr<sf::RenderWindow> m_window;
     };
 };  // namespace H2DE

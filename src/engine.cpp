@@ -11,6 +11,7 @@ using namespace H2DE;
 struct Engine::Impl {
         bool m_running = false;
         uint16_t m_fps;
+        std::shared_ptr<sf::RenderWindow> m_window;
         std::unique_ptr<RenderEngine> m_render_engine;
 };
 
@@ -20,7 +21,6 @@ std::unique_ptr<H2DE::Engine::Impl>& H2DE::Engine::getImpl() noexcept {
 }
 
 void Engine::init(const std::string& config_file) {
-    getImpl()->m_render_engine = std::make_unique<RenderEngine>();
     utils::read_config config(config_file);
 
     uint16_t width = config.get<int32_t>("window.width");
@@ -30,7 +30,11 @@ void Engine::init(const std::string& config_file) {
     std::string title = config.get<std::string>("window.title");
 
     getImpl()->m_fps = fps;
-    getImpl()->m_render_engine->init(height, width, title, full_screen);
+    getImpl()->m_window = std::make_shared<sf::RenderWindow>(
+        sf::VideoMode(width, height), title,
+        (full_screen) ? (sf::Style::Fullscreen) : 7U);
+    getImpl()->m_render_engine =
+        std::make_unique<RenderEngine>(getImpl()->m_window);
     getImpl()->m_running = true;
 }
 
