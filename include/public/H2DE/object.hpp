@@ -7,7 +7,8 @@
 
 namespace H2DE
 {
-    typedef std::tuple<Component::Transform> object_components;
+    typedef std::tuple<Component::Transform, Component::Sprite>
+        object_components;
 
     class Object
     {
