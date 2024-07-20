@@ -29,12 +29,12 @@ void Engine::init(const std::string& config_file) {
     bool full_screen = config.get<bool>("window.fullscreen");
     std::string title = config.get<std::string>("window.title");
 
-    getImpl()->m_fps = fps;
     getImpl()->m_window = std::make_shared<sf::RenderWindow>(
         sf::VideoMode(width, height), title,
         (full_screen) ? (sf::Style::Fullscreen) : 7U);
     getImpl()->m_render_engine =
         std::make_unique<RenderEngine>(getImpl()->m_window);
+    getImpl()->m_fps = fps;
     getImpl()->m_running = true;
 }
 
