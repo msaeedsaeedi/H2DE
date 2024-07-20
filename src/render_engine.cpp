@@ -1,5 +1,6 @@
 #include "H2DE/render_engine.hpp"
 
+#include "H2DE/asset_manager.hpp"
 #include "H2DE/scene_manager.hpp"
 
 H2DE::RenderEngine::RenderEngine()
@@ -17,12 +18,23 @@ void H2DE::RenderEngine::render() const {
     const auto scene = SceneManager::get_current_scene();
     const auto &objects = scene->m_object_manager->get_all();
     for (const auto &object : objects) {
-        sf::CircleShape shape(100.0f);
-        shape.setFillColor(sf::Color::Green);
-        float x = object->get_component<Component::Transform>().position.first;
-        float y = object->get_component<Component::Transform>().position.second;
-        shape.setPosition(x, y);
-        m_window->draw(shape);
+        const auto &sprite_component =
+            object->get_component<Component::Sprite>();
+        const auto &transform_component =
+            object->get_component<Component::Transform>();
+        if (sprite_component.has == false || transform_component.has == false)
+            continue;
+
+        sf::Sprite sprite;
+        const auto &texture =
+            AssetManager::get_texture(sprite_component.asset_id);
+        sprite.setTexture(texture);
+        sprite.setPosition(transform_component.position.first,
+                           transform_component.position.second);
+        sprite.setScale(sprite_component.scale.first,
+                        sprite_component.scale.second);
+        sprite.setRotation(transform_component.rotation);
+        m_window->draw(sprite);
     }
     m_window->display();
 }
