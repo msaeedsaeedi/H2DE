@@ -25,7 +25,5 @@ namespace H2DE
             Engine() = delete;
             Engine(const Engine&) = delete;
             Engine& operator=(const Engine&) = delete;
-
-            static void process_events();
     };
 }  // namespace H2DE

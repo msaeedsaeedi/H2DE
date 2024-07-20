@@ -2,6 +2,7 @@
 
 #include <chrono>
 
+#include "H2DE/Events/event_handler.hpp"
 #include "H2DE/render_engine.hpp"
 #include "H2DE/scene_manager.hpp"
 #include "H2DE/utils/readconfig.hpp"
@@ -13,6 +14,10 @@ struct Engine::Impl {
         uint16_t m_fps;
         std::shared_ptr<sf::RenderWindow> m_window;
         std::unique_ptr<RenderEngine> m_render_engine;
+};
+
+struct H2DE::EventHandler::Impl {
+        std::shared_ptr<sf::RenderWindow> m_window;
 };
 
 std::unique_ptr<H2DE::Engine::Impl>& H2DE::Engine::getImpl() noexcept {
@@ -32,10 +37,15 @@ void Engine::init(const std::string& config_file) {
     getImpl()->m_window = std::make_shared<sf::RenderWindow>(
         sf::VideoMode(width, height), title,
         (full_screen) ? (sf::Style::Fullscreen) : 7U);
+    H2DE::EventHandler::getImpl()->m_window = getImpl()->m_window;
     getImpl()->m_render_engine =
         std::make_unique<RenderEngine>(getImpl()->m_window);
     getImpl()->m_fps = fps;
     getImpl()->m_running = true;
+
+    H2DE::EventHandler::listen_window_events(
+        H2DE::WindowEventType::WINDOW_CLOSE,
+        []() -> void { H2DE::Engine::exit(); });
 }
 
 void Engine::run() {
@@ -50,16 +60,13 @@ void Engine::run() {
 
         auto current_scene = SceneManager::get_current_scene();
 
-        process_events();
+        H2DE::EventHandler::process_events();
         current_scene->update(delta_time.count());
         getImpl()->m_render_engine->render();
     }
 }
 void Engine::exit() {
     getImpl()->m_running = false;
-}
-
-void Engine::process_events() {
 }
 
 Engine::~Engine() = default;
