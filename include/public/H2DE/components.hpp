@@ -7,12 +7,15 @@ namespace H2DE
 
     namespace Component
     {
-        struct Transform {
+        class Transform
+        {
+            public:
                 Transform() = default;
                 Transform(float x, float y) : position(x, y) {
                 }
 
                 std::pair<float, float> position;
+                float rotation = 0.0f;
                 bool has = false;
         };
 
