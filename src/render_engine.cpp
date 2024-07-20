@@ -27,13 +27,15 @@ void H2DE::RenderEngine::render() const {
 
         sf::Sprite sprite;
         const auto &texture =
-            AssetManager::get_texture(sprite_component.asset_id);
+            AssetManager::get_texture(sprite_component.m_asset_id);
         sprite.setTexture(texture);
         sprite.setPosition(transform_component.position.first,
                            transform_component.position.second);
-        sprite.setScale(sprite_component.scale.first,
-                        sprite_component.scale.second);
+        sprite.setScale(transform_component.scale.first,
+                        transform_component.scale.second);
         sprite.setRotation(transform_component.rotation);
+        sprite.setOrigin(sprite_component.origin.first,
+                         sprite_component.origin.second);
         m_window->draw(sprite);
     }
     m_window->display();

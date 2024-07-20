@@ -14,7 +14,8 @@ namespace H2DE
             static std::vector<sf::Texture> &get_textures();
 
         public:
-            static uint32_t load_texture(const std::string &url);
+            static const std::tuple<uint32_t, float, float> load_texture(
+                const std::string &url);
             static const sf::Texture &get_texture(uint32_t id);
 
         private:

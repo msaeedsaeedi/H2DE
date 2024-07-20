@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include <utility>
 
 namespace H2DE
@@ -15,7 +16,9 @@ namespace H2DE
                 }
 
                 std::pair<float, float> position;
+                std::pair<float, float> scale{1.0f, 1.0f};
                 float rotation = 0.0f;
+
                 bool has = false;
         };
 
@@ -28,11 +31,14 @@ namespace H2DE
                 Sprite() = default;
                 Sprite(const std::string& url);
 
-                std::pair<float, float> scale{1.0f, 1.0f};
+                std::pair<float, float> origin;
+                std::pair<float, float>
+                    size;  // ! BUG: User can change this value
+
                 bool has = false;
 
             private:
-                uint32_t asset_id;
+                uint32_t m_asset_id;
         };
     }  // namespace Component
 }  // namespace H2DE
