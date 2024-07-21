@@ -9,7 +9,7 @@
 namespace H2DE
 {
     using window_callback_t = std::function<void()>;
-    using key_callback_t = std::function<void(const KeyActionType&)>;
+    using keyboard_callback_t = std::function<void(const H2DE::KeyActionType&)>;
     using mouse_callback_t = std::function<void()>;
     using text_callback_t = std::function<void()>;
 
@@ -27,7 +27,8 @@ namespace H2DE
             ~EventHandler();
             static void listen_window_events(const WindowEventType& type,
                                              const window_callback_t& callback);
-            static void listen_key(const Key&, const key_callback_t& callback);
+            static void listen_keyboard(const Key&,
+                                        const keyboard_callback_t& callback);
             static void listen_mouse(const mouse_callback_t& callback);
             static void listen_text(const text_callback_t& callback);
 

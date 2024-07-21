@@ -9,7 +9,8 @@ struct H2DE::EventHandler::Impl {
 
         std::unordered_map<WindowEventType, std::vector<window_callback_t>>
             window_callbacks;
-        std::unordered_map<Key, std::vector<key_callback_t>> key_callbacks;
+        std::unordered_map<Key, std::vector<keyboard_callback_t>>
+            keyboard_callbacks;
         std::vector<mouse_callback_t> mouse_callbacks;
         std::vector<text_callback_t> text_callbacks;
 
@@ -46,7 +47,7 @@ void H2DE::EventHandler::Impl::process_window_events(const sf::Event& event) {
 }
 
 void H2DE::EventHandler::Impl::process_key_events() {
-    for (const auto& [key, callbacks] : key_callbacks) {
+    for (const auto& [key, callbacks] : keyboard_callbacks) {
         if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(key))) {
             for (const auto& callback : callbacks) {
                 callback(KeyActionType::Pressed);
@@ -70,9 +71,9 @@ void H2DE::EventHandler::listen_window_events(
     getImpl()->window_callbacks[type].push_back(callback);
 }
 
-void H2DE::EventHandler::listen_key(const Key& key,
-                                    const key_callback_t& callback) {
-    getImpl()->key_callbacks[key].push_back(callback);
+void H2DE::EventHandler::listen_keyboard(const Key& key,
+                                         const keyboard_callback_t& callback) {
+    getImpl()->keyboard_callbacks[key].push_back(callback);
 }
 
 void H2DE::EventHandler::listen_mouse(const mouse_callback_t& callback) {
