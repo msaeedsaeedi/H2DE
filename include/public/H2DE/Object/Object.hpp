@@ -15,45 +15,50 @@ namespace H2DE
         private:
             friend class ObjectManager;
 
+            Object(uint32_t _id);
+
             uint32_t m_id;
             bool m_active;
             object_components components;
 
-            Object(uint32_t _id) : m_id(_id) {
-                m_active = true;
-            }
-
         public:
-            void destroy() {
-                m_active = false;
-            }
-
-            uint32_t get_id() const {
-                return this->m_id;
-            }
+            void destroy();
+            uint32_t get_id() const;
 
             template <typename T>
-            T& get_component() {
-                return std::get<T>(components);
-            }
+            T& get_component();
 
             template <typename T, typename... Args>
-            T& add_component(Args&&... args) {
-                auto& component = get_component<T>();
-                component = T{std::forward<Args>(args)...};
-                component.has = true;
-                return component;
-            }
+            T& add_component(Args&&... args);
 
             template <typename T>
-            void remove_component() {
-                get_component<T>() = T();
-            }
+            void remove_component();
 
             template <typename T>
-            bool has_component() {
-                return get_component<T>().has;
-            }
+            bool has_component();
     };
 
 }  // namespace H2DE
+
+template <typename T>
+inline T& H2DE::Object::get_component() {
+    return std::get<T>(components);
+}
+
+template <typename T, typename... Args>
+inline T& H2DE::Object::add_component(Args&&... args) {
+    auto& component = get_component<T>();
+    component = T{std::forward<Args>(args)...};
+    component.has = true;
+    return component;
+}
+
+template <typename T>
+inline void H2DE::Object::remove_component() {
+    get_component<T>() = T();
+}
+
+template <typename T>
+inline bool H2DE::Object::has_component() {
+    return get_component<T>().has;
+}
