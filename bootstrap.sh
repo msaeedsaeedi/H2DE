@@ -2,6 +2,7 @@
 
 # Exit immediately if a command exits with a non-zero status.
 set -e
+mkdir -p external
 
 # Function to clone, build, and install a GitHub repository
 install_from_github() {
