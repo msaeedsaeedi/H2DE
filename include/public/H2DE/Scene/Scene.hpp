@@ -15,16 +15,11 @@ namespace H2DE
             friend class RenderEngine;
             friend class Engine;
 
-            Scene()
-                : m_object_manager(
-                      std::unique_ptr<ObjectManager>(new ObjectManager())) {
-            }
+            Scene();
             virtual ~Scene() = default;
             virtual void init() = 0;
             virtual void update() = 0;
-            const float get_delta() const noexcept {
-                return m_delta;
-            }
+            const float get_delta() const noexcept;
 
         protected:
             std::unique_ptr<ObjectManager> m_object_manager;
