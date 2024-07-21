@@ -17,6 +17,7 @@ class AssetManagerTest : public ::testing::Test
         std::string corruptedImageUrl = "assets/corrupted_texture.png";
 
         void SetUp() override {
+            createfolder("assets");
             createValidTexture();
             createInvalidTexture();
             createLargeTexture();
@@ -27,6 +28,11 @@ class AssetManagerTest : public ::testing::Test
             remove(validUrl.c_str());
             remove(largeImageUrl.c_str());
             remove(corruptedImageUrl.c_str());
+        }
+
+        void createfolder(const std::string &folder) {
+            std::string command = "mkdir -p " + folder;
+            system(command.c_str());
         }
 
         void createValidTexture() {
