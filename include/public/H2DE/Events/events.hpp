@@ -7,7 +7,8 @@ namespace H2DE
         WINDOW_RESIZE,
         WINDOW_LOST_FOCUS,
         WINDOW_GAINED_FOCUS,
-        TEXT_ENTERED
+        MOUSE_ENTERED = 12,
+        MOUSE_LEFT = 13,
     };
 
     enum class KeyActionType {
