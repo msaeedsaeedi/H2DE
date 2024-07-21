@@ -8,8 +8,12 @@ namespace H2DE
 {
     class Scene
     {
+        private:
+            float m_delta = 0.0f;
+
         public:
             friend class RenderEngine;
+            friend class Engine;
 
             Scene()
                 : m_object_manager(
@@ -17,7 +21,10 @@ namespace H2DE
             }
             virtual ~Scene() = default;
             virtual void init() = 0;
-            virtual void update(const float delta) = 0;
+            virtual void update() = 0;
+            const float get_delta() const noexcept {
+                return m_delta;
+            }
 
         protected:
             std::unique_ptr<ObjectManager> m_object_manager;

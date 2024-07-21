@@ -61,7 +61,8 @@ void Engine::run() {
         auto current_scene = SceneManager::get_current_scene();
 
         H2DE::EventHandler::process_events();
-        current_scene->update(delta_time.count());
+        current_scene->m_delta = delta_time.count();
+        current_scene->update();
         getImpl()->m_render_engine->render();
     }
 }
