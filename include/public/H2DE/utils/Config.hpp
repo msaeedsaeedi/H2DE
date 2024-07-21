@@ -61,7 +61,7 @@ inline H2DE::Config::Config(const std::string &config_file)
 
 inline void H2DE::Config::set(const std::string &path, const int value) {
     auto [setting, key] = getPath(path);
-    if (key.empty())
+    if (key == "#")
         setting.add(libconfig::Setting::Type::TypeInt) = value;
     else {
         if (setting.exists(key))
@@ -74,7 +74,7 @@ inline void H2DE::Config::set(const std::string &path, const int value) {
 
 inline void H2DE::Config::set(const std::string &name, const float value) {
     auto [setting, key] = getPath(name);
-    if (key.empty())
+    if (key == "#")
         setting.add(libconfig::Setting::Type::TypeFloat) = value;
     else {
         if (setting.exists(key))
@@ -87,7 +87,7 @@ inline void H2DE::Config::set(const std::string &name, const float value) {
 
 inline void H2DE::Config::set(const std::string &name, const long value) {
     auto [setting, key] = getPath(name);
-    if (key.empty())
+    if (key == "#")
         setting.add(libconfig::Setting::Type::TypeInt64) = value;
     else {
         if (setting.exists(key))
@@ -100,7 +100,7 @@ inline void H2DE::Config::set(const std::string &name, const long value) {
 
 inline void H2DE::Config::set(const std::string &name, const bool value) {
     auto [setting, key] = getPath(name);
-    if (key.empty())
+    if (key == "#")
         setting.add(libconfig::Setting::Type::TypeBoolean) = value;
     else {
         if (setting.exists(key))
@@ -113,7 +113,7 @@ inline void H2DE::Config::set(const std::string &name, const bool value) {
 
 inline void H2DE::Config::set(const std::string &name, const char *value) {
     auto [setting, key] = getPath(name);
-    if (key.empty())
+    if (key == "#")
         setting.add(libconfig::Setting::Type::TypeString) = value;
     else {
         if (setting.exists(key))
@@ -126,7 +126,7 @@ inline void H2DE::Config::set(const std::string &name, const char *value) {
 
 inline void H2DE::Config::set(const std::string &name, std::string value) {
     auto [setting, key] = getPath(name);
-    if (key.empty())
+    if (key == "#")
         setting.add(libconfig::Setting::Type::TypeString) = value;
     else {
         if (setting.exists(key))
@@ -213,10 +213,6 @@ inline std::pair<libconfig::Setting &, std::string> H2DE::Config::getPath(
             current = &(*current)[t];
         }
     }
-
-    if (tokens.back() == "#")
-        return {*current, ""};
-
     return {*current, tokens.back()};
 }
 
