@@ -7,24 +7,14 @@ namespace H2DE
     class IOException : public H2DEException
     {
         public:
-            IOException(const std::string& file)
-                : H2DEException("I/O Error", "Error reading file: " + file) {
-            }
+            IOException(const std::string& file);
     };
 
     class ParseException : public H2DEException
     {
         public:
             ParseException(const std::string& file, int line,
-                           const std::string& error)
-                : H2DEException("Parsing Error",
-                                "File: " + file +
-                                    "\n\tLine: " + std::to_string(line) +
-                                    "\n\tError: " + error) {
-            }
-            ParseException(const std::string& file, const std::string& error)
-                : H2DEException("Parsing Error",
-                                "File: " + file + "\n\tError: " + error) {
-            }
+                           const std::string& error);
+            ParseException(const std::string& file, const std::string& error);
     };
 }  // namespace H2DE
