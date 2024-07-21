@@ -116,6 +116,3 @@ void H2DE::EventHandler::listen_mouse(const MouseEventType& type,
 void H2DE::EventHandler::listen_text(const text_callback_t& callback) {
     getImpl()->text_callbacks.push_back({"", callback});
 }
-
-H2DE::EventHandler::~EventHandler() {
-}

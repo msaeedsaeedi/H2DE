@@ -33,7 +33,6 @@ namespace H2DE
             EventHandler(const EventHandler& other) = delete;
             EventHandler& operator=(const EventHandler& other) = delete;
 
-            ~EventHandler();
             static void listen_window_events(const WindowEventType& type,
                                              const window_callback_t& callback);
             static void listen_keyboard(const Key&,
