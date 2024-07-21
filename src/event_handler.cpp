@@ -11,7 +11,8 @@ struct H2DE::EventHandler::Impl {
             window_callbacks;
         std::unordered_map<Key, std::vector<keyboard_callback_t>>
             keyboard_callbacks;
-        std::vector<mouse_callback_t> mouse_callbacks;
+        std::unordered_map<MouseEventType, std::vector<mouse_callback_t>>
+            mouse_callbacks;
         std::vector<text_callback_t> text_callbacks;
 
         void process_window_events(const sf::Event& event);
@@ -61,6 +62,26 @@ void H2DE::EventHandler::Impl::process_key_events() {
 }
 
 void H2DE::EventHandler::Impl::process_mouse_events(const sf::Event& event) {
+    auto key = static_cast<MouseEventType>(event.type);
+    const auto& callbacks =
+        mouse_callbacks[static_cast<int>(key) == 10 ? MouseEventType::MOUSE_KEY
+                                                    : key];
+    for (const auto& callback : callbacks) {
+        switch (event.type) {
+            case sf::Event::MouseMoved:
+                std::get<0>(callback)(event.mouseMove.x, event.mouseMove.y);
+                break;
+            case sf::Event::MouseButtonPressed:
+                std::get<1>(callback)(KeyActionType::Pressed);
+                break;
+            case sf::Event::MouseButtonReleased:
+                std::get<1>(callback)(KeyActionType::Released);
+                break;
+            case sf::Event::MouseWheelScrolled:
+                std::get<2>(callback)(event.mouseWheelScroll.delta);
+                break;
+        }
+    }
 }
 
 void H2DE::EventHandler::Impl::process_text_events(const sf::Event& event) {
@@ -76,8 +97,9 @@ void H2DE::EventHandler::listen_keyboard(const Key& key,
     getImpl()->keyboard_callbacks[key].push_back(callback);
 }
 
-void H2DE::EventHandler::listen_mouse(const mouse_callback_t& callback) {
-    getImpl()->mouse_callbacks.push_back(callback);
+void H2DE::EventHandler::listen_mouse(const MouseEventType& type,
+                                      const mouse_callback_t& callback) {
+    getImpl()->mouse_callbacks[type].push_back(callback);
 }
 
 void H2DE::EventHandler::listen_text(const text_callback_t& callback) {

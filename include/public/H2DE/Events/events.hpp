@@ -16,11 +16,8 @@ namespace H2DE
     };
 
     enum class MouseEventType {
-        MOUSE_MOVED,
-        MOUSE_KEYPRESSED,
-        MOUSE_KEYRELEASED,
-        MOUSE_ENTERED,
-        MOUSE_LEFT,
-        MOUSE_WHEEL_MOVED
+        MOUSE_WHEEL_SCROLLED = 8,
+        MOUSE_KEY = 9,
+        MOUSE_MOVED = 11,
     };
-};
+};  // namespace H2DE
