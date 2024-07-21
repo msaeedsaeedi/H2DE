@@ -1,8 +1,8 @@
+#include "H2DE/utils/Config.hpp"
+
 #include <gtest/gtest.h>
 
 #include <filesystem>
-
-#include "H2DE/utils/Config.hpp"
 
 class WriteConfigTest : public ::testing::Test
 {
@@ -33,6 +33,25 @@ TEST_F(WriteConfigTest, scalar) {
     EXPECT_STREQ(config.get<std::string>("data.string").c_str(),
                  "Hello, World!");
     EXPECT_EQ(config.get<bool>("data.bool"), true);
+}
+
+TEST_F(WriteConfigTest, scalar_update) {
+    H2DE::Config config("assets/configuration/config.cfg");
+    config.set("data.int", 32);
+    config.set("data.float", 23.0f);
+    config.set("data.string", "Hello, World!");
+    config.set("data.bool", true);
+
+    config.set("data.int", 64);
+    config.set("data.float", 46.0f);
+    config.set("data.string", "World, Hello!");
+    config.set("data.bool", false);
+
+    EXPECT_FLOAT_EQ(config.get<float>("data.float"), 46.0f);
+    EXPECT_EQ(config.get<int>("data.int"), 64);
+    EXPECT_STREQ(config.get<std::string>("data.string").c_str(),
+                 "World, Hello!");
+    EXPECT_EQ(config.get<bool>("data.bool"), false);
 }
 
 TEST_F(WriteConfigTest, array) {

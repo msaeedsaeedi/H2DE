@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <filesystem>
 #include <libconfig.h++>
 #include <sstream>
 #include <string>
@@ -47,14 +48,27 @@ namespace H2DE
 
 inline H2DE::Config::Config(const std::string &config_file)
     : config_file(config_file) {
+    try {
+        if (std::filesystem::exists(config_file))
+            cfg.readFile(config_file);
+    } catch (const libconfig::FileIOException &fioex) {
+        throw H2DE::IOException(config_file);
+    } catch (const libconfig::ParseException &pex) {
+        throw H2DE::ParseException(pex.getFile(), pex.getLine(),
+                                   pex.getError());
+    }
 }
 
 inline void H2DE::Config::set(const std::string &path, const int value) {
     auto [setting, key] = getPath(path);
     if (key.empty())
         setting.add(libconfig::Setting::Type::TypeInt) = value;
-    else
-        setting.add(key, libconfig::Setting::Type::TypeInt) = value;
+    else {
+        if (setting.exists(key))
+            setting[key] = value;
+        else
+            setting.add(key, libconfig::Setting::Type::TypeInt) = value;
+    }
     write();
 }
 
@@ -62,8 +76,12 @@ inline void H2DE::Config::set(const std::string &name, const float value) {
     auto [setting, key] = getPath(name);
     if (key.empty())
         setting.add(libconfig::Setting::Type::TypeFloat) = value;
-    else
-        setting.add(key, libconfig::Setting::Type::TypeFloat) = value;
+    else {
+        if (setting.exists(key))
+            setting[key] = value;
+        else
+            setting.add(key, libconfig::Setting::Type::TypeFloat) = value;
+    }
     write();
 }
 
@@ -71,8 +89,12 @@ inline void H2DE::Config::set(const std::string &name, const long value) {
     auto [setting, key] = getPath(name);
     if (key.empty())
         setting.add(libconfig::Setting::Type::TypeInt64) = value;
-    else
-        setting.add(key, libconfig::Setting::Type::TypeInt64) = value;
+    else {
+        if (setting.exists(key))
+            setting[key] = value;
+        else
+            setting.add(key, libconfig::Setting::Type::TypeInt64) = value;
+    }
     write();
 }
 
@@ -80,8 +102,12 @@ inline void H2DE::Config::set(const std::string &name, const bool value) {
     auto [setting, key] = getPath(name);
     if (key.empty())
         setting.add(libconfig::Setting::Type::TypeBoolean) = value;
-    else
-        setting.add(key, libconfig::Setting::Type::TypeBoolean) = value;
+    else {
+        if (setting.exists(key))
+            setting[key] = value;
+        else
+            setting.add(key, libconfig::Setting::Type::TypeBoolean) = value;
+    }
     write();
 }
 
@@ -89,8 +115,12 @@ inline void H2DE::Config::set(const std::string &name, const char *value) {
     auto [setting, key] = getPath(name);
     if (key.empty())
         setting.add(libconfig::Setting::Type::TypeString) = value;
-    else
-        setting.add(key, libconfig::Setting::Type::TypeString) = value;
+    else {
+        if (setting.exists(key))
+            setting[key] = value;
+        else
+            setting.add(key, libconfig::Setting::Type::TypeString) = value;
+    }
     write();
 }
 
@@ -98,8 +128,12 @@ inline void H2DE::Config::set(const std::string &name, std::string value) {
     auto [setting, key] = getPath(name);
     if (key.empty())
         setting.add(libconfig::Setting::Type::TypeString) = value;
-    else
-        setting.add(key, libconfig::Setting::Type::TypeString) = value;
+    else {
+        if (setting.exists(key))
+            setting[key] = value;
+        else
+            setting.add(key, libconfig::Setting::Type::TypeString) = value;
+    }
     write();
 }
 
