@@ -20,7 +20,7 @@ namespace H2DE
     using mouse_callback_t =
         std::variant<mouse_move_callback_t, mouse_key_callback_t,
                      mouse_scroll_callback_t>;
-    using text_callback_t = std::function<void()>;
+    using text_callback_t = std::function<void(const std::string&)>;
 
     class EventHandler
     {
