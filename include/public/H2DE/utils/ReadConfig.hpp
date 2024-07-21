@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-#include "H2DE/exceptions/io_exceptions.hpp"
+#include "H2DE/Exceptions/IOExceptions.hpp"
 #include "libconfig.h++"
 
 namespace utils

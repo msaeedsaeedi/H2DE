@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "H2DE/object_manager.hpp"
+#include "H2DE/ObjectManager.hpp"
 
 namespace H2DE
 {

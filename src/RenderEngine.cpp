@@ -1,7 +1,6 @@
-#include "H2DE/render_engine.hpp"
-
-#include "H2DE/asset_manager.hpp"
-#include "H2DE/scene_manager.hpp"
+#include "H2DE/AssetManager.hpp"
+#include "H2DE/RenderEngine.hpp"
+#include "H2DE/SceneManager.hpp"
 
 H2DE::RenderEngine::RenderEngine(std::shared_ptr<sf::RenderWindow> window)
     : m_window(window) {

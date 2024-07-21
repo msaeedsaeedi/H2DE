@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-#include "H2DE/object.hpp"
-
 namespace H2DE
 {
     class Engine

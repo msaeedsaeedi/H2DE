@@ -1,8 +1,8 @@
-#include "H2DE/Events/event_handler.hpp"
-
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <vector>
+
+#include "H2DE/EventHandler.hpp"
 
 struct H2DE::EventHandler::Impl {
         std::shared_ptr<sf::RenderWindow> m_window;

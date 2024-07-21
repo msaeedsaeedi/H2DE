@@ -1,11 +1,11 @@
-#include "H2DE/engine.hpp"
+#include "H2DE/Engine.hpp"
 
 #include <chrono>
 
-#include "H2DE/Events/event_handler.hpp"
-#include "H2DE/render_engine.hpp"
-#include "H2DE/scene_manager.hpp"
-#include "H2DE/utils/readconfig.hpp"
+#include "H2DE/EventHandler.hpp"
+#include "H2DE/RenderEngine.hpp"
+#include "H2DE/SceneManager.hpp"
+#include "H2DE/utils/ReadConfig.hpp"
 
 using namespace H2DE;
 

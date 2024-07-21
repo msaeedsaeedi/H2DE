@@ -1,6 +1,6 @@
 #pragma once
 
-#include "H2DE/exceptions/exceptions.hpp"
+#include "H2DE/Exceptions/Exceptions.hpp"
 
 namespace H2DE
 {

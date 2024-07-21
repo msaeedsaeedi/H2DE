@@ -4,8 +4,8 @@
 #include <memory>
 #include <variant>
 
-#include "H2DE/Events/events.hpp"
-#include "H2DE/Events/key.hpp"
+#include "H2DE/Events/Events.hpp"
+#include "H2DE/Events/Keys.hpp"
 
 namespace H2DE
 {

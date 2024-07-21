@@ -4,7 +4,7 @@
 #include <string>
 #include <unordered_map>
 
-#include "H2DE/scene.hpp"
+#include "H2DE/Scene/Scene.hpp"
 
 namespace H2DE
 {

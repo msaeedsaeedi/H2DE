@@ -1,4 +1,4 @@
-#include "H2DE/asset_manager.hpp"
+#include "H2DE/AssetManager.hpp"
 
 std::vector<sf::Texture> &H2DE::AssetManager::get_textures() {
     static std::vector<sf::Texture> m_textures;

@@ -1,6 +1,6 @@
-#include "H2DE/components.hpp"
+#include "H2DE/Object/Components.hpp"
 
-#include "H2DE/asset_manager.hpp"
+#include "H2DE/AssetManager.hpp"
 
 H2DE::Component::Sprite::Sprite(const std::string& url) {
     auto [m_asset_id, height, width] = H2DE::AssetManager::load_texture(url);

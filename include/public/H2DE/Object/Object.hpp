@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <tuple>
 
-#include "H2DE/components.hpp"
+#include "H2DE/Object/Components.hpp"
 
 namespace H2DE
 {

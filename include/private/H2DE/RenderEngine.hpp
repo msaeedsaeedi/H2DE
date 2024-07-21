@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "H2DE/object.hpp"
+#include "H2DE/Object/Object.hpp"
 
 namespace H2DE
 {
