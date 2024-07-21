@@ -5,7 +5,7 @@
 #include "H2DE/EventHandler.hpp"
 #include "H2DE/RenderEngine.hpp"
 #include "H2DE/SceneManager.hpp"
-#include "H2DE/utils/ReadConfig.hpp"
+#include "H2DE/utils/Config.hpp"
 
 using namespace H2DE;
 
@@ -26,7 +26,7 @@ std::unique_ptr<H2DE::Engine::Impl>& H2DE::Engine::getImpl() noexcept {
 }
 
 void Engine::init(const std::string& config_file) {
-    utils::read_config config(config_file);
+    H2DE::Config config(config_file);
 
     uint16_t width = config.get<int32_t>("window.width");
     uint16_t height = config.get<int32_t>("window.height");
