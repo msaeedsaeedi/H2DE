@@ -1,7 +1,10 @@
 #include "H2DE/Exceptions/IOExceptions.hpp"
 
-H2DE::IOException::IOException(const std::string &file)
-    : H2DEException("I/O Error", "Error reading file: " + file) {
+H2DE::IOException::IOException(const std::string &file, bool read)
+    : H2DEException("I/O Error", "Error " +
+                                     ((read) ? std::string("reading")
+                                             : std::string("writing")) +
+                                     " file: " + file) {
 }
 
 H2DE::ParseException::ParseException(const std::string &file, int line,

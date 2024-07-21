@@ -7,7 +7,7 @@ namespace H2DE
     class IOException : public H2DEException
     {
         public:
-            IOException(const std::string& file);
+            IOException(const std::string& file, bool read = true);
     };
 
     class ParseException : public H2DEException
