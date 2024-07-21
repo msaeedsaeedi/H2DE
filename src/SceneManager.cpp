@@ -1,5 +1,6 @@
-#include "H2DE/Exceptions/SceneException.hpp"
 #include "H2DE/SceneManager.hpp"
+
+#include "H2DE/Exceptions/SceneExceptions.hpp"
 
 std::unordered_map<std::string, std::shared_ptr<H2DE::Scene>>
     H2DE::SceneManager::m_scenes;
