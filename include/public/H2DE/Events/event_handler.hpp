@@ -9,17 +9,21 @@
 
 namespace H2DE
 {
-    using window_callback_t = std::function<void()>;
+    using window_resize_callback_t = std::function<void(const int, const int)>;
+    using window_default_callback_t = std::function<void()>;
+    using window_callback_t =
+        std::variant<window_default_callback_t, window_resize_callback_t>;
+
     using keyboard_callback_t = std::function<void(const H2DE::KeyActionType&)>;
 
     using mouse_move_callback_t = std::function<void(const int, const int)>;
     using mouse_key_callback_t =
         std::function<void(const H2DE::KeyActionType&)>;
     using mouse_scroll_callback_t = std::function<void(const float)>;
-
     using mouse_callback_t =
         std::variant<mouse_move_callback_t, mouse_key_callback_t,
                      mouse_scroll_callback_t>;
+
     using text_callback_t = std::function<void(const std::string&)>;
 
     class EventHandler

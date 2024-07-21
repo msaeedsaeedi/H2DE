@@ -43,7 +43,14 @@ void H2DE::EventHandler::Impl::process_window_events(const sf::Event& event) {
     const auto& callbacks =
         window_callbacks[static_cast<WindowEventType>(event.type)];
     for (const auto& callback : callbacks) {
-        callback();
+        switch (event.type) {
+            case sf::Event::Resized:
+                std::get<1>(callback)(event.size.width, event.size.height);
+                break;
+            default:
+                std::get<0>(callback)();
+                break;
+        }
     }
 }
 
