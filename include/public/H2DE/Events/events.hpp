@@ -11,7 +11,7 @@ namespace H2DE
         MOUSE_LEFT = 13,
     };
 
-    enum class KeyActionType {
+    enum class KeyState {
         Pressed,
         Released,
     };

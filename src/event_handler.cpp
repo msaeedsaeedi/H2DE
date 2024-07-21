@@ -58,11 +58,11 @@ void H2DE::EventHandler::Impl::process_key_events() {
     for (const auto& [key, callbacks] : keyboard_callbacks) {
         if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(key))) {
             for (const auto& callback : callbacks) {
-                callback(KeyActionType::Pressed);
+                callback(KeyState::Pressed);
             }
         } else {
             for (const auto& callback : callbacks) {
-                callback(KeyActionType::Released);
+                callback(KeyState::Released);
             }
         }
     }
@@ -79,10 +79,10 @@ void H2DE::EventHandler::Impl::process_mouse_events(const sf::Event& event) {
                 std::get<0>(callback)(event.mouseMove.x, event.mouseMove.y);
                 break;
             case sf::Event::MouseButtonPressed:
-                std::get<1>(callback)(KeyActionType::Pressed);
+                std::get<1>(callback)(KeyState::Pressed);
                 break;
             case sf::Event::MouseButtonReleased:
-                std::get<1>(callback)(KeyActionType::Released);
+                std::get<1>(callback)(KeyState::Released);
                 break;
             case sf::Event::MouseWheelScrolled:
                 std::get<2>(callback)(event.mouseWheelScroll.delta);
