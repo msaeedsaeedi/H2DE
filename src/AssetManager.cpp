@@ -9,7 +9,7 @@ const std::tuple<uint32_t, float, float> H2DE::AssetManager::load_texture(
     const std::string &url) {
     sf::Texture texture;
     if (!texture.loadFromFile(url)) {
-        throw H2DE::IOException(url);
+        throw H2DE::IOException(url, "Failed to load texture");
     }
     get_textures().push_back(texture);
     return {get_textures().size() - 1, static_cast<float>(texture.getSize().x),
