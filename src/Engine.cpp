@@ -28,11 +28,11 @@ std::unique_ptr<H2DE::Engine::Impl>& H2DE::Engine::getImpl() noexcept {
 void Engine::init(const std::string& config_file) {
     H2DE::Config config(config_file);
 
-    uint16_t width = config.get<int32_t>("window.width");
-    uint16_t height = config.get<int32_t>("window.height");
-    uint16_t fps = config.get<int32_t>("window.fps");
-    bool full_screen = config.get<bool>("window.fullscreen");
-    std::string title = config.get<std::string>("window.title");
+    uint16_t width = config.get("window.width");
+    uint16_t height = config.get("window.height");
+    uint16_t fps = config.get("window.fps");
+    bool full_screen = config.get("window.fullscreen");
+    std::string title = config.get("window.title");
 
     getImpl()->m_window = std::make_shared<sf::RenderWindow>(
         sf::VideoMode(width, height), title,
