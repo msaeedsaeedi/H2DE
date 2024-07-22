@@ -10,7 +10,6 @@ set(BUILD_SHARED_LIBS OFF)
 
 # Install Packages
 add_subdirectory(external/SFML)
-add_subdirectory(external/libconfig)
 
 # Source Files
 file(GLOB_RECURSE SOURCES "src/*.cpp")
@@ -26,7 +25,6 @@ target_link_libraries(${PROJECT_NAME}
         sfml-graphics
         sfml-window
         sfml-system
-        config++
 )
 
 # Include Directories in the target
@@ -34,7 +32,6 @@ target_include_directories(${PROJECT_NAME}
     PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/include/public
     PRIVATE
-        ${libconfig_SOURCE_DIR}/lib
         ${SFML_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/include/private
 )
