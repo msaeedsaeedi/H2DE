@@ -1,8 +1,8 @@
 # Harmony 2D Engine (H2DE)
 
-[![Build Status](https://github.com/msaeedsaeedi/H2DE/actions/workflows/build.yml/badge.svg)](https://github.com/msaeedsaeedi/H2DE/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Documentation](https://img.shields.io/badge/docs-h2de.vercel.com-blue.svg)](https://h2de.vercel.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/h2de?style=for-the-badge&name=Docs)
+[![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](https://h2de.vercel.app/docs "Go to project documentation")
 
 ## Overview
 
