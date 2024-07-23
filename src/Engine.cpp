@@ -34,18 +34,15 @@ void Engine::init(const std::string& config_file) {
     bool full_screen = config.get("window.fullscreen");
     std::string title = config.get("window.title");
 
-    getImpl()->m_window = std::make_shared<sf::RenderWindow>(
-        sf::VideoMode(width, height), title,
-        (full_screen) ? (sf::Style::Fullscreen) : 7U);
+    getImpl()->m_window = std::make_shared<sf::RenderWindow>(sf::VideoMode(width, height), title,
+                                                             (full_screen) ? (sf::Style::Fullscreen) : 7U);
     H2DE::EventHandler::getImpl()->m_window = getImpl()->m_window;
-    getImpl()->m_render_engine =
-        std::make_unique<RenderEngine>(getImpl()->m_window);
+    getImpl()->m_render_engine = std::make_unique<RenderEngine>(getImpl()->m_window);
     getImpl()->m_fps = fps;
     getImpl()->m_running = true;
 
-    H2DE::EventHandler::listen_window_events(
-        H2DE::WindowEventType::WINDOW_CLOSE,
-        []() -> void { H2DE::Engine::exit(); });
+    H2DE::EventHandler::listen_window_events(H2DE::WindowEventType::WINDOW_CLOSE,
+                                             []() -> void { H2DE::Engine::exit(); });
 }
 
 void Engine::run() {

@@ -1,7 +1,8 @@
+#include "H2DE/ObjectManager.hpp"
+
 #include <algorithm>
 
 #include "H2DE/Exceptions/Exceptions.hpp"
-#include "H2DE/ObjectManager.hpp"
 
 H2DE::object_t& H2DE::ObjectManager::add_object(uint32_t id) {
     m_objects.push_back(std::shared_ptr<Object>(new Object(id)));
@@ -19,9 +20,7 @@ H2DE::object_t& H2DE::ObjectManager::get_object(uint32_t id) {
 
 void H2DE::ObjectManager::remove_object(uint32_t id) {
     auto it = std::find_if(m_objects.begin(), m_objects.end(),
-                           [id](const std::shared_ptr<Object>& obj) {
-                               return obj->get_id() == id;
-                           });
+                           [id](const std::shared_ptr<Object>& obj) { return obj->get_id() == id; });
 
     if (it != m_objects.end()) {
         m_objects.erase(it);

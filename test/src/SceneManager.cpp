@@ -28,10 +28,8 @@ namespace H2DE
     {
         protected:
             void SetUp() override {
-                SceneManager::add_scene("Scene1",
-                                        std::make_shared<MockScene>());
-                SceneManager::add_scene("Scene2",
-                                        std::make_shared<MockScene>());
+                SceneManager::add_scene("Scene1", std::make_shared<MockScene>());
+                SceneManager::add_scene("Scene2", std::make_shared<MockScene>());
             }
 
             void TearDown() override {

@@ -5,8 +5,7 @@ std::vector<sf::Texture> &H2DE::AssetManager::get_textures() {
     return m_textures;
 }
 
-const std::tuple<uint32_t, float, float> H2DE::AssetManager::load_texture(
-    const std::string &url) {
+const std::tuple<uint32_t, float, float> H2DE::AssetManager::load_texture(const std::string &url) {
     sf::Texture texture;
     if (!texture.loadFromFile(url)) {
         throw H2DE::IOException(url, "Failed to load texture");

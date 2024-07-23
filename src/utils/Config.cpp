@@ -8,8 +8,7 @@
 
 namespace H2DE
 {
-    Config::Config(const std::string &config_file, bool create)
-        : config_file(config_file) {
+    Config::Config(const std::string &config_file, bool create) : config_file(config_file) {
         validateFileExtension(config_file);
         if (create)
             saveConfig();
@@ -46,11 +45,9 @@ namespace H2DE
             try {
                 output << cfg.dump(4);
             } catch (const nlohmann::json::type_error &e) {
-                throw ParseException(config_file,
-                                     "Type error: " + std::string(e.what()));
+                throw ParseException(config_file, "Type error: " + std::string(e.what()));
             } catch (const nlohmann::json::out_of_range &e) {
-                throw ParseException(config_file, "Out of range error: " +
-                                                      std::string(e.what()));
+                throw ParseException(config_file, "Out of range error: " + std::string(e.what()));
             }
             output.close();
         } else {
@@ -91,8 +88,7 @@ namespace H2DE
             if (current->contains(token)) {
                 current = &(*current)[token];
             } else {
-                throw ParseException(config_file,
-                                     "Key not found { " + path + " }");
+                throw ParseException(config_file, "Key not found { " + path + " }");
             }
         }
         return current;

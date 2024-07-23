@@ -1,18 +1,15 @@
+#include "H2DE/EventHandler.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <unordered_map>
 #include <vector>
 
-#include "H2DE/EventHandler.hpp"
-
 struct H2DE::EventHandler::Impl {
         std::shared_ptr<sf::RenderWindow> m_window;
 
-        std::unordered_map<WindowEventType, std::vector<window_callback_t>>
-            window_callbacks;
-        std::unordered_map<Key, std::vector<keyboard_callback_t>>
-            keyboard_callbacks;
-        std::unordered_map<MouseEventType, std::vector<mouse_callback_t>>
-            mouse_callbacks;
+        std::unordered_map<WindowEventType, std::vector<window_callback_t>> window_callbacks;
+        std::unordered_map<Key, std::vector<keyboard_callback_t>> keyboard_callbacks;
+        std::unordered_map<MouseEventType, std::vector<mouse_callback_t>> mouse_callbacks;
         std::vector<std::pair<std::string, text_callback_t>> text_callbacks;
 
         void process_window_events(const sf::Event& event);
@@ -21,10 +18,8 @@ struct H2DE::EventHandler::Impl {
         void process_text_events(const sf::Event& event);
 };
 
-std::unique_ptr<H2DE::EventHandler::Impl>&
-H2DE::EventHandler::getImpl() noexcept {
-    static std::unique_ptr<Impl> m_impl =
-        std::make_unique<EventHandler::Impl>();
+std::unique_ptr<H2DE::EventHandler::Impl>& H2DE::EventHandler::getImpl() noexcept {
+    static std::unique_ptr<Impl> m_impl = std::make_unique<EventHandler::Impl>();
     return m_impl;
 }
 
@@ -40,8 +35,7 @@ void H2DE::EventHandler::process_events() {
 }
 
 void H2DE::EventHandler::Impl::process_window_events(const sf::Event& event) {
-    const auto& callbacks =
-        window_callbacks[static_cast<WindowEventType>(event.type)];
+    const auto& callbacks = window_callbacks[static_cast<WindowEventType>(event.type)];
     for (const auto& callback : callbacks) {
         switch (event.type) {
             case sf::Event::Resized:
@@ -70,9 +64,7 @@ void H2DE::EventHandler::Impl::process_key_events() {
 
 void H2DE::EventHandler::Impl::process_mouse_events(const sf::Event& event) {
     auto key = static_cast<MouseEventType>(event.type);
-    const auto& callbacks =
-        mouse_callbacks[static_cast<int>(key) == 10 ? MouseEventType::MOUSE_KEY
-                                                    : key];
+    const auto& callbacks = mouse_callbacks[static_cast<int>(key) == 10 ? MouseEventType::MOUSE_KEY : key];
     for (const auto& callback : callbacks) {
         switch (event.type) {
             case sf::Event::MouseMoved:
@@ -105,18 +97,15 @@ void H2DE::EventHandler::Impl::process_text_events(const sf::Event& event) {
     }
 }
 
-void H2DE::EventHandler::listen_window_events(
-    const WindowEventType& type, const window_callback_t& callback) {
+void H2DE::EventHandler::listen_window_events(const WindowEventType& type, const window_callback_t& callback) {
     getImpl()->window_callbacks[type].push_back(callback);
 }
 
-void H2DE::EventHandler::listen_keyboard(const Key& key,
-                                         const keyboard_callback_t& callback) {
+void H2DE::EventHandler::listen_keyboard(const Key& key, const keyboard_callback_t& callback) {
     getImpl()->keyboard_callbacks[key].push_back(callback);
 }
 
-void H2DE::EventHandler::listen_mouse(const MouseEventType& type,
-                                      const mouse_callback_t& callback) {
+void H2DE::EventHandler::listen_mouse(const MouseEventType& type, const mouse_callback_t& callback) {
     getImpl()->mouse_callbacks[type].push_back(callback);
 }
 

@@ -67,8 +67,7 @@ TEST_F(AssetManagerTest, LoadTextureValid) {
 }
 
 TEST_F(AssetManagerTest, LoadTextureInvalid) {
-    EXPECT_THROW(H2DE::AssetManager::load_texture(invalidUrl),
-                 H2DE::IOException);
+    EXPECT_THROW(H2DE::AssetManager::load_texture(invalidUrl), H2DE::IOException);
 }
 
 TEST_F(AssetManagerTest, LoadTextureMultiple) {
@@ -90,8 +89,7 @@ TEST_F(AssetManagerTest, LoadTextureDimensions) {
     float width = static_cast<float>(image.getSize().x);
     float height = static_cast<float>(image.getSize().y);
 
-    auto [index, loadedWidth, loadedHeight] =
-        H2DE::AssetManager::load_texture(validUrl);
+    auto [index, loadedWidth, loadedHeight] = H2DE::AssetManager::load_texture(validUrl);
     sf::Texture texture = H2DE::AssetManager::get_texture(index);
     EXPECT_EQ(width, static_cast<float>(texture.getSize().x));
     EXPECT_EQ(height, static_cast<float>(texture.getSize().y));
@@ -109,8 +107,7 @@ TEST_F(AssetManagerTest, LoadTextureNonImageFile) {
     file << "This is a text file.";
     file.close();
 
-    EXPECT_THROW(H2DE::AssetManager::load_texture(nonImageUrl),
-                 H2DE::IOException);
+    EXPECT_THROW(H2DE::AssetManager::load_texture(nonImageUrl), H2DE::IOException);
     remove(nonImageUrl.c_str());
 }
 
@@ -123,8 +120,7 @@ TEST_F(AssetManagerTest, LoadTextureLargeImage) {
 }
 
 TEST_F(AssetManagerTest, LoadTextureCorruptedImage) {
-    EXPECT_THROW(H2DE::AssetManager::load_texture(corruptedImageUrl),
-                 H2DE::IOException);
+    EXPECT_THROW(H2DE::AssetManager::load_texture(corruptedImageUrl), H2DE::IOException);
 }
 
 TEST_F(AssetManagerTest, LoadTextureConcurrent) {

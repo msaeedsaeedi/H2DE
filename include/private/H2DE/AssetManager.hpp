@@ -42,8 +42,7 @@ namespace H2DE
              * @return A tuple containing the texture ID, width, and height.
              * @throws H2DE::IOException if the texture fails to load.
              */
-            static const std::tuple<uint32_t, float, float> load_texture(
-                const std::string &url);
+            static const std::tuple<uint32_t, float, float> load_texture(const std::string &url);
 
             /**
              * @brief Retrieves a texture by its ID.
