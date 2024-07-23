@@ -1,86 +1,98 @@
+# Harmony 2D Engine (H2DE)
 
-# C++ CMake Project Template
+[![Build Status](https://github.com/msaeedsaeedi/H2DE/actions/workflows/build.yml/badge.svg)](https://github.com/msaeedsaeedi/H2DE/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Documentation](https://img.shields.io/badge/docs-h2de.vercel.com-blue.svg)](https://h2de.vercel.com)
 
-This repository provides a template for C++ projects using CMake with custom styling and equipped with GTest for unit testing.
+## Overview
+
+Harmony 2D Engine (H2DE) is a modern, open-source game engine written in C++ using SFML for rendering. It is designed to simplify the game development process in C++. Currently, it supports Linux, with future plans to support Windows. This project is in its initial stages, and contributions are welcome.
 
 ## Features
 
-- **CMake Support**: Easy project setup and building.
-- **Custom Styling**: Integrated `.clang-format` for consistent code styling.
-- **Editor Configuration**: `.editorconfig` for consistent editor settings.
-- **Unit Testing**: GTest integration for writing and running tests.
-- **.gitignore**: Pre-configured `.gitignore` for common C++ projects.
+- **Easy to Use:** Designed to simplify game development using C++.
+- **SFML Rendering:** Utilizes SFML for efficient 2D rendering.
+- **Cross-Platform:** Linux support, with Windows support planned.
+- **Open Source:** Free to use and contribute to.
+- **Modern Documentation:** Using Fumadocs for clean, accessible documentation.
+- **Quality Assurance:** Tests written with gtest for high quality.
 
 ## Getting Started
 
 ### Prerequisites
 
-- CMake 3.22 or higher
-- A C++ compiler
-- Git
-- GTest (if not already installed)
+- **Linux:** A Linux distribution.
+- **C++ Compiler:** A modern C++ compiler (e.g., GCC, Clang).
+- **CMake:** Version 3.30 or higher.
+- **SFML:** Version 2.6.1 or higher.
+- **GTest** Version 1.15.0 or higher.
 
 ### Installation
 
-1. **Clone the Repository**
+1. **Clone the Repository:**
+    ```sh
+    git clone https://github.com/msaeedsaeedi/H2DE.git
+    cd H2DE
+    ```
+2. **Bootstrap**
+    ```sh
+    chmod +x bootstrap.sh
+    ./bootstrap.sh
+    ```
 
-   ```sh
-   git clone https://github.com/yourusername/cmake-project-template.git
-   cd cmake-project-template
-   ```
+3. **Build the Engine:**
+    ```sh
+    mkdir build
+    cd build
+    cmake ..
+    make
+    ```
 
-2. **Configure the Project**
+3. **Run Tests:**
+    ```sh
+    ctest
+    ```
 
-   Create a build directory and configure the project using CMake:
+### Documentation
 
-   ```sh
-   mkdir build
-   cd build
-   cmake ..
-   ```
+The full documentation is available [here](https://h2de.vercel.com). Documentation includes setup guides, API references, and examples.
 
-3. **Build the Project**
+## Contributing
 
-   ```sh
-   cmake --build .
-   ```
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
 
-4. **Run Tests**
+### Contributor List
 
-   ```sh
-   ctest
-   ```
+Special thanks to all the contributors:
 
-## Project Structure
-
-```
-cmake-project-template/
-├── .clang-format        # Custom styling configuration
-├── .editorconfig        # Editor configuration
-├── .gitignore           # Git ignore file
-├── CMakeLists.txt       # Main CMake configuration file
-├── src/
-│   └── main.cpp         # Main source file
-└── test/
-    ├── CMakeLists.txt   # CMake configuration file for tests
-    ├── test_main.cpp    # Main test file
-    └── src/
-        └── temp_test.cpp # Example test file
-```
-
-## Custom Styling
-
-The project includes a `.clang-format` file to ensure consistent code styling. Customize it as needed to fit your coding standards.
-
-## Contributions
-
-Contributions are welcome! Please open an issue or submit a pull request if you have suggestions for improvements or new features.
+- **Muhammad Saeed Saeedi** - [msaeedsaeedi](https://github.com/msaeedsaeedi)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+H2DE is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## Acknowledgments
+## Code of Conduct
 
-- [CMake](https://cmake.org/)
-- [GTest](https://github.com/google/googletest)
+Please note that this project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+
+## Contact
+
+If you have any questions or suggestions, feel free to open an issue or contact the maintainer:
+
+- **Muhammad Saeed Saeedi** - [msaeedsaeedi](https://github.com/msaeedsaeedi)
+
+## Acknowledgements
+
+- **SFML:** Simple and Fast Multimedia Library
+- **Fumadocs:** Documentation framework for modern documentation
+- **gtest:** Google Test framework for testing
+
+## Future Plans
+
+- **Windows Support:** Plan to add Windows support using CMake for easy integration.
+- **Custom Domain:** Planning to migrate documentation to a custom domain.
+
+---
+
+*Note: H2DE is a fun project aimed at improving skills and providing an open-source solution for game development. It is completely free, and everyone is welcome to use it, but no one can claim its copyright or ownership.*
+
