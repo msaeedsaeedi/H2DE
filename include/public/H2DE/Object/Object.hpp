@@ -46,7 +46,7 @@ namespace H2DE
             /**
              * @brief Marks the object for destruction.
              */
-            void destroy();
+            void destroy() noexcept;
 
         public:
             /**
@@ -54,7 +54,7 @@ namespace H2DE
              *
              * @return The unique identifier of the object.
              */
-            uint32_t get_id() const;
+            uint32_t get_id() const noexcept;
 
         public:
             /**
@@ -66,7 +66,7 @@ namespace H2DE
              * @return A reference to the component.
              */
             template <typename T>
-            T& get_component();
+            T& get_component() noexcept;
 
         public:
             /**
@@ -104,7 +104,7 @@ namespace H2DE
              * @return True if the object has the component, false otherwise.
              */
             template <typename T>
-            bool has_component();
+            bool has_component() noexcept;
 
         private:
             uint32_t m_id;                /**< Unique identifier of the object */
@@ -115,7 +115,7 @@ namespace H2DE
 }  // namespace H2DE
 
 template <typename T>
-inline T& H2DE::Object::get_component() {
+inline T& H2DE::Object::get_component() noexcept {
     return std::get<T>(components);
 }
 
@@ -133,6 +133,6 @@ inline void H2DE::Object::remove_component() {
 }
 
 template <typename T>
-inline bool H2DE::Object::has_component() {
+inline bool H2DE::Object::has_component() noexcept {
     return get_component<T>().has;
 }

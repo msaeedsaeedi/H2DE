@@ -57,6 +57,7 @@ namespace H2DE
              *
              * @param name The name of the scene.
              * @param scene A shared pointer to the scene to be added.
+             * @throws H2DE::SceneException if the scene name already exists.
              */
             static void add_scene(const std::string& name, const std::shared_ptr<Scene>& scene);
 
@@ -67,6 +68,7 @@ namespace H2DE
              * This static method changes the current scene to the scene with the specified name.
              *
              * @param name The name of the scene to switch to.
+             * @throws H2DE::SceneException if the scene name does not exist.
              */
             static void change_scene(const std::string& name);
 
@@ -77,6 +79,7 @@ namespace H2DE
              * This static method removes the scene with the specified name from the manager.
              *
              * @param name The name of the scene to remove.
+             * @throws H2DE::SceneException if the scene name does not exist.
              */
             static void remove_scene(const std::string& name);
 
@@ -88,6 +91,7 @@ namespace H2DE
              *
              * @param name The name of the scene to retrieve.
              * @return A shared pointer to the scene.
+             * @throws H2DE::SceneException if the scene name does not exist.
              */
             static std::shared_ptr<Scene> get_scene(const std::string& name);
 
@@ -98,6 +102,7 @@ namespace H2DE
              * This static method returns a shared pointer to the current active scene.
              *
              * @return A shared pointer to the current scene.
+             * @throws H2DE::SceneException if there is no current scene.
              */
             static std::shared_ptr<Scene> get_current_scene();
 

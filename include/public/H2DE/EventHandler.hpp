@@ -118,7 +118,7 @@ namespace H2DE
              * @param type The type of the window event.
              * @param callback The callback function to handle the event.
              */
-            static void listen_window_events(const WindowEventType& type, const window_callback_t& callback);
+            static void listen_window_events(const WindowEventType& type, const window_callback_t& callback) noexcept;
 
         public:
             /**
@@ -129,7 +129,7 @@ namespace H2DE
              * @param key The key for which the event should be handled.
              * @param callback The callback function to handle the event.
              */
-            static void listen_keyboard(const Key& key, const keyboard_callback_t& callback);
+            static void listen_keyboard(const Key& key, const keyboard_callback_t& callback) noexcept;
 
         public:
             /**
@@ -140,7 +140,7 @@ namespace H2DE
              * @param type The type of the mouse event.
              * @param callback The callback function to handle the event.
              */
-            static void listen_mouse(const MouseEventType& type, const mouse_callback_t& callback);
+            static void listen_mouse(const MouseEventType& type, const mouse_callback_t& callback) noexcept;
 
         public:
             /**
@@ -150,7 +150,7 @@ namespace H2DE
              *
              * @param callback The callback function to handle the event.
              */
-            static void listen_text(const text_callback_t& callback);
+            static void listen_text(const text_callback_t& callback) noexcept;
 
         private:
             /**

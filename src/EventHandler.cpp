@@ -97,18 +97,18 @@ void H2DE::EventHandler::Impl::process_text_events(const sf::Event& event) {
     }
 }
 
-void H2DE::EventHandler::listen_window_events(const WindowEventType& type, const window_callback_t& callback) {
+void H2DE::EventHandler::listen_window_events(const WindowEventType& type, const window_callback_t& callback) noexcept {
     getImpl()->window_callbacks[type].push_back(callback);
 }
 
-void H2DE::EventHandler::listen_keyboard(const Key& key, const keyboard_callback_t& callback) {
+void H2DE::EventHandler::listen_keyboard(const Key& key, const keyboard_callback_t& callback) noexcept {
     getImpl()->keyboard_callbacks[key].push_back(callback);
 }
 
-void H2DE::EventHandler::listen_mouse(const MouseEventType& type, const mouse_callback_t& callback) {
+void H2DE::EventHandler::listen_mouse(const MouseEventType& type, const mouse_callback_t& callback) noexcept {
     getImpl()->mouse_callbacks[type].push_back(callback);
 }
 
-void H2DE::EventHandler::listen_text(const text_callback_t& callback) {
+void H2DE::EventHandler::listen_text(const text_callback_t& callback) noexcept {
     getImpl()->text_callbacks.push_back({"", callback});
 }

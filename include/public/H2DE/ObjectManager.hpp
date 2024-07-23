@@ -63,6 +63,7 @@ namespace H2DE
              *
              * @param id The unique identifier of the object.
              * @return A reference to the object with the specified ID.
+             * @throws H2DE::H2DEException if the object with the specified ID does not exist.
              */
             object_t& get_object(uint32_t id);
 
@@ -73,6 +74,7 @@ namespace H2DE
              * This method removes the object with the specified ID from the collection.
              *
              * @param id The unique identifier of the object.
+             * @throws H2DE::H2DEException if the object with the specified ID does not exist.
              */
             void remove_object(uint32_t id);
 
