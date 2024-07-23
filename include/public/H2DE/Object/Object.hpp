@@ -9,11 +9,9 @@ namespace H2DE
 {
     /**
      * @typedef object_components
-     * @brief Typedef for a tuple containing the common components of an object.
-     *
-     * This typedef defines a tuple containing the Transform and Sprite components.
+     * @brief Alias for a tuple containing the common components of an object.
      */
-    typedef std::tuple<Component::Transform, Component::Sprite> object_components;
+    using object_components = std::tuple<Component::Transform, Component::Sprite>;
 
     /**
      * @class Object
