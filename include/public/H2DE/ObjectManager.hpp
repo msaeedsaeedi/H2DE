@@ -29,15 +29,20 @@ namespace H2DE
      */
     class ObjectManager
     {
-        private:
+        public:
             friend class Scene;
 
-            objects_t m_objects; /**< Collection of game objects */
-
+        private:
             /**
              * @brief Default constructor.
              */
             ObjectManager() = default;
+
+        public:
+            /**
+             * @brief Default destructor.
+             */
+            ~ObjectManager() = default;
 
         public:
             /**
@@ -50,6 +55,7 @@ namespace H2DE
              */
             object_t& add_object(uint32_t id);
 
+        public:
             /**
              * @brief Retrieves an object by its ID.
              *
@@ -60,6 +66,7 @@ namespace H2DE
              */
             object_t& get_object(uint32_t id);
 
+        public:
             /**
              * @brief Removes an object by its ID.
              *
@@ -69,6 +76,7 @@ namespace H2DE
              */
             void remove_object(uint32_t id);
 
+        public:
             /**
              * @brief Retrieves all objects.
              *
@@ -77,5 +85,8 @@ namespace H2DE
              * @return A reference to the vector of all objects.
              */
             objects_t& get_all();
+
+        private:
+            objects_t m_objects; /**< Collection of game objects */
     };
 };  // namespace H2DE

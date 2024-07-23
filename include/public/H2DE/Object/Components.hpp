@@ -23,6 +23,7 @@ namespace H2DE
                  */
                 Transform() = default;
 
+            public:
                 /**
                  * @brief Constructs a Transform with specified position.
                  *
@@ -34,6 +35,13 @@ namespace H2DE
                 Transform(float x, float y) : position(x, y) {
                 }
 
+            public:
+                /**
+                 * @brief Destructor.
+                 */
+                ~Transform() = default;
+
+            public:
                 std::pair<float, float> position;          /**< Position of the game object (x, y) */
                 std::pair<float, float> scale{1.0f, 1.0f}; /**< Scale of the game object (x, y) */
                 float rotation = 0.0f;                     /**< Rotation of the game object in degrees */
@@ -49,7 +57,7 @@ namespace H2DE
          */
         class Sprite
         {
-            private:
+            public:
                 friend class H2DE::RenderEngine;
 
             public:
@@ -58,6 +66,7 @@ namespace H2DE
                  */
                 Sprite() = default;
 
+            public:
                 /**
                  * @brief Constructs a Sprite with a specified texture URL.
                  *
@@ -67,6 +76,13 @@ namespace H2DE
                  */
                 Sprite(const std::string& url);
 
+            public:
+                /**
+                 * @brief Destructor.
+                 */
+                ~Sprite() = default;
+
+            public:
                 std::pair<float, float> origin; /**< Origin of the sprite (x, y) */
                 std::pair<float, float> size;   /**< Size of the sprite (width, height) */
 

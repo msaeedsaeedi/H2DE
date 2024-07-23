@@ -20,14 +20,29 @@ namespace H2DE
     {
         private:
             /**
-             * @brief Retrieves the collection of loaded textures.
-             *
-             * This static method returns a reference to the vector containing
-             * all loaded textures.
-             *
-             * @return A reference to the vector of loaded textures.
+             * @brief Deleted default constructor to prevent instantiation.
              */
-            static std::vector<sf::Texture> &get_textures();
+            AssetManager() = delete;
+
+        private:
+            /**
+             * @brief Deleted copy constructor to prevent copying.
+             */
+            AssetManager(const AssetManager &) = delete;
+
+        private:
+            /**
+             * @brief Deleted assignment operator to prevent assignment.
+             *
+             * @return AssetManager& Reference to the AssetManager object.
+             */
+            AssetManager &operator=(const AssetManager &) = delete;
+
+        public:
+            /**
+             * @brief default Destructor.
+             */
+            ~AssetManager() = default;
 
         public:
             /**
@@ -44,6 +59,7 @@ namespace H2DE
              */
             static const std::tuple<uint32_t, float, float> load_texture(const std::string &url);
 
+        public:
             /**
              * @brief Retrieves a texture by its ID.
              *
@@ -58,20 +74,13 @@ namespace H2DE
 
         private:
             /**
-             * @brief Deleted default constructor to prevent instantiation.
-             */
-            AssetManager() = delete;
-
-            /**
-             * @brief Deleted copy constructor to prevent copying.
-             */
-            AssetManager(const AssetManager &) = delete;
-
-            /**
-             * @brief Deleted assignment operator to prevent assignment.
+             * @brief Retrieves the collection of loaded textures.
              *
-             * @return AssetManager& Reference to the AssetManager object.
+             * This static method returns a reference to the vector containing
+             * all loaded textures.
+             *
+             * @return A reference to the vector of loaded textures.
              */
-            AssetManager &operator=(const AssetManager &) = delete;
+            static std::vector<sf::Texture> &get_textures();
     };
 };  // namespace H2DE

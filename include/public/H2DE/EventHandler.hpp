@@ -73,8 +73,14 @@ namespace H2DE
      */
     class EventHandler
     {
-        private:
+        public:
             friend class Engine;
+
+        private:
+            /**
+             * @struct Impl
+             * @brief Internal implementation structure for the EventHandler class.
+             */
             struct Impl;
 
         public:
@@ -83,11 +89,19 @@ namespace H2DE
              */
             EventHandler() = delete;
 
+        public:
             /**
              * @brief Deleted copy constructor to prevent copying.
              */
             EventHandler(const EventHandler& other) = delete;
 
+        public:
+            /**
+             * @brief default Destructor.
+             */
+            ~EventHandler() = default;
+
+        public:
             /**
              * @brief Deleted assignment operator to prevent assignment.
              *
@@ -95,6 +109,7 @@ namespace H2DE
              */
             EventHandler& operator=(const EventHandler& other) = delete;
 
+        public:
             /**
              * @brief Registers a callback for a specific window event type.
              *
@@ -105,6 +120,7 @@ namespace H2DE
              */
             static void listen_window_events(const WindowEventType& type, const window_callback_t& callback);
 
+        public:
             /**
              * @brief Registers a callback for a specific keyboard event.
              *
@@ -115,6 +131,7 @@ namespace H2DE
              */
             static void listen_keyboard(const Key& key, const keyboard_callback_t& callback);
 
+        public:
             /**
              * @brief Registers a callback for a specific mouse event type.
              *
@@ -125,6 +142,7 @@ namespace H2DE
              */
             static void listen_mouse(const MouseEventType& type, const mouse_callback_t& callback);
 
+        public:
             /**
              * @brief Registers a callback for text input events.
              *
@@ -142,6 +160,7 @@ namespace H2DE
              */
             static std::unique_ptr<Impl>& getImpl() noexcept;
 
+        private:
             /**
              * @brief Processes the events.
              *

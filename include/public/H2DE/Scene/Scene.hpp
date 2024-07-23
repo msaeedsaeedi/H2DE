@@ -16,23 +16,23 @@ namespace H2DE
      */
     class Scene
     {
-        private:
-            float m_delta = 0.0f; /**< Time delta between frames */
-
         public:
             friend class RenderEngine;
             friend class Engine;
 
+        public:
             /**
              * @brief Default constructor.
              */
             Scene();
 
+        public:
             /**
              * @brief Virtual destructor.
              */
             virtual ~Scene() = default;
 
+        public:
             /**
              * @brief Initializes the scene.
              *
@@ -41,6 +41,7 @@ namespace H2DE
              */
             virtual void init() = 0;
 
+        public:
             /**
              * @brief Updates the scene.
              *
@@ -49,6 +50,7 @@ namespace H2DE
              */
             virtual void update() = 0;
 
+        public:
             /**
              * @brief Retrieves the time delta between frames.
              *
@@ -58,5 +60,8 @@ namespace H2DE
 
         protected:
             std::unique_ptr<ObjectManager> m_object_manager; /**< Unique pointer to the object manager */
+
+        private:
+            float m_delta = 0.0f; /**< Time delta between frames */
     };
 }  // namespace H2DE

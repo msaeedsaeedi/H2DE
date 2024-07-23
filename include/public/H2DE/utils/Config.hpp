@@ -28,11 +28,13 @@ namespace H2DE
              */
             Config(const std::string &config_file, bool create = false);
 
+        public:
             /**
              * @brief Destructor.
              */
             ~Config();
 
+        public:
             /**
              * @brief Sets a configuration value.
              *
@@ -43,6 +45,7 @@ namespace H2DE
              */
             void set(const std::string &name, const json &value);
 
+        public:
             /**
              * @brief Gets a configuration value.
              *
@@ -64,6 +67,7 @@ namespace H2DE
              */
             void validateFileExtension(const std::string &config_file);
 
+        private:
             /**
              * @brief Loads the configuration file.
              *
@@ -71,6 +75,7 @@ namespace H2DE
              */
             void loadConfig();
 
+        private:
             /**
              * @brief Saves the configuration file.
              *
@@ -78,6 +83,7 @@ namespace H2DE
              */
             void saveConfig() const;
 
+        private:
             /**
              * @brief Retrieves a nested JSON object by path.
              *
@@ -88,6 +94,7 @@ namespace H2DE
              */
             json *getNestedJson(const std::string &path);
 
+        private:
             /**
              * @brief Retrieves a nested JSON object by path (const version).
              *

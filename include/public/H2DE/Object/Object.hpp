@@ -23,9 +23,10 @@ namespace H2DE
      */
     class Object
     {
-        private:
+        public:
             friend class ObjectManager;
 
+        private:
             /**
              * @brief Constructs an Object with a specified ID.
              *
@@ -35,9 +36,11 @@ namespace H2DE
              */
             Object(uint32_t _id);
 
-            uint32_t m_id;                /**< Unique identifier of the object */
-            bool m_active;                /**< Indicates if the object is active */
-            object_components components; /**< Tuple containing the object's components */
+        public:
+            /**
+             * @brief Default destructor.
+             */
+            ~Object() = default;
 
         public:
             /**
@@ -45,6 +48,7 @@ namespace H2DE
              */
             void destroy();
 
+        public:
             /**
              * @brief Retrieves the unique ID of the object.
              *
@@ -52,6 +56,7 @@ namespace H2DE
              */
             uint32_t get_id() const;
 
+        public:
             /**
              * @brief Retrieves a reference to a component of the object.
              *
@@ -63,6 +68,7 @@ namespace H2DE
             template <typename T>
             T& get_component();
 
+        public:
             /**
              * @brief Adds a component to the object.
              *
@@ -77,6 +83,7 @@ namespace H2DE
             template <typename T, typename... Args>
             T& add_component(Args&&... args);
 
+        public:
             /**
              * @brief Removes a component from the object.
              *
@@ -87,6 +94,7 @@ namespace H2DE
             template <typename T>
             void remove_component();
 
+        public:
             /**
              * @brief Checks if the object has a specific component.
              *
@@ -97,6 +105,11 @@ namespace H2DE
              */
             template <typename T>
             bool has_component();
+
+        private:
+            uint32_t m_id;                /**< Unique identifier of the object */
+            bool m_active;                /**< Indicates if the object is active */
+            object_components components; /**< Tuple containing the object's components */
     };
 
 }  // namespace H2DE

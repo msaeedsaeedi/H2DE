@@ -23,12 +23,25 @@ namespace H2DE
              */
             struct Impl;
 
+        private:
             /**
-             * @brief Retrieves the unique instance of the Impl structure.
-             *
-             * @return A reference to the unique pointer of the Impl structure.
+             * @brief Deleted default constructor to prevent instantiation.
              */
-            static std::unique_ptr<Impl>& getImpl() noexcept;
+            Engine() = delete;
+
+        private:
+            /**
+             * @brief Deleted copy constructor to prevent copying.
+             */
+            Engine(const Engine&) = delete;
+
+        private:
+            /**
+             * @brief Deleted assignment operator to prevent assignment.
+             *
+             * @return Reference to the Engine instance.
+             */
+            Engine& operator=(const Engine&) = delete;
 
         public:
             /**
@@ -36,6 +49,7 @@ namespace H2DE
              */
             ~Engine();
 
+        public:
             /**
              * @brief Initializes the engine with the specified configuration file.
              *
@@ -45,6 +59,7 @@ namespace H2DE
              */
             static void init(const std::string& config_file);
 
+        public:
             /**
              * @brief Runs the main game loop.
              *
@@ -52,6 +67,7 @@ namespace H2DE
              */
             static void run();
 
+        public:
             /**
              * @brief Exits the engine.
              *
@@ -61,20 +77,10 @@ namespace H2DE
 
         private:
             /**
-             * @brief Deleted default constructor to prevent instantiation.
-             */
-            Engine() = delete;
-
-            /**
-             * @brief Deleted copy constructor to prevent copying.
-             */
-            Engine(const Engine&) = delete;
-
-            /**
-             * @brief Deleted assignment operator to prevent assignment.
+             * @brief Retrieves the unique instance of the Impl structure.
              *
-             * @return Reference to the Engine instance.
+             * @return A reference to the unique pointer of the Impl structure.
              */
-            Engine& operator=(const Engine&) = delete;
+            static std::unique_ptr<Impl>& getImpl() noexcept;
     };
 }  // namespace H2DE

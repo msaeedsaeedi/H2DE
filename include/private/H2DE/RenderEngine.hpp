@@ -24,6 +24,7 @@ namespace H2DE
              */
             RenderEngine() = default;
 
+        public:
             /**
              * @brief Constructs the RenderEngine with a render window.
              *
@@ -34,11 +35,13 @@ namespace H2DE
              */
             RenderEngine(std::shared_ptr<sf::RenderWindow> window);
 
+        public:
             /**
-             * @brief Destructor.
+             * @brief default Destructor.
              */
-            ~RenderEngine();
+            ~RenderEngine() = default;
 
+        public:
             /**
              * @brief Renders the current scene.
              *

@@ -9,6 +9,12 @@
 namespace H2DE
 {
     /**
+     * @typedef scenes_t
+     * @brief Alias for an unordered map of scene names to shared pointers to Scenes.
+     */
+    using scenes_t = std::unordered_map<std::string, std::shared_ptr<Scene>>;
+
+    /**
      * @class SceneManager
      * @brief Manages the creation, switching, and removal of game scenes.
      *
@@ -23,11 +29,19 @@ namespace H2DE
              */
             SceneManager() = delete;
 
+        private:
             /**
              * @brief Deleted copy constructor to prevent copying.
              */
             SceneManager(const SceneManager&) = delete;
 
+        public:
+            /**
+             * @brief Destructor.
+             */
+            ~SceneManager() = default;
+
+        private:
             /**
              * @brief Deleted assignment operator to prevent assignment.
              *
@@ -46,6 +60,7 @@ namespace H2DE
              */
             static void add_scene(const std::string& name, const std::shared_ptr<Scene>& scene);
 
+        public:
             /**
              * @brief Changes the current scene to the specified scene.
              *
@@ -55,6 +70,7 @@ namespace H2DE
              */
             static void change_scene(const std::string& name);
 
+        public:
             /**
              * @brief Removes a scene from the manager.
              *
@@ -64,6 +80,7 @@ namespace H2DE
              */
             static void remove_scene(const std::string& name);
 
+        public:
             /**
              * @brief Retrieves a scene by its name.
              *
@@ -74,6 +91,7 @@ namespace H2DE
              */
             static std::shared_ptr<Scene> get_scene(const std::string& name);
 
+        public:
             /**
              * @brief Retrieves the current active scene.
              *
@@ -84,14 +102,7 @@ namespace H2DE
             static std::shared_ptr<Scene> get_current_scene();
 
         private:
-            /**
-             * @brief Collection of scenes managed by the SceneManager.
-             */
-            static std::unordered_map<std::string, std::shared_ptr<Scene>> m_scenes;
-
-            /**
-             * @brief The current active scene.
-             */
-            static std::shared_ptr<Scene> m_current_scene;
+            static scenes_t m_scenes; /**< Unordered map of scene names to shared pointers to Scenes */
+            static std::shared_ptr<Scene> m_current_scene; /**< Shared pointer to the current active scene */
     };
 }  // namespace H2DE

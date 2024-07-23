@@ -27,5 +27,3 @@ void H2DE::RenderEngine::render() const {
     }
     m_window->display();
 }
-
-H2DE::RenderEngine::~RenderEngine() = default;
