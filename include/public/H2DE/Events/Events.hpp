@@ -26,8 +26,8 @@ namespace H2DE
      * This enum class defines the states of a key, such as pressed or released.
      */
     enum class KeyState {
-        Pressed,  /**< Key state for when a key is pressed */
-        Released, /**< Key state for when a key is released */
+        PRESSED,  /**< Key state for when a key is pressed */
+        RELEASED, /**< Key state for when a key is released */
     };
 
     /**
