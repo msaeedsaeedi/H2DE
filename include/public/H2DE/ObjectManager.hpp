@@ -46,14 +46,15 @@ namespace H2DE
 
         public:
             /**
-             * @brief Adds a new object with the specified ID.
+             * @brief Adds a new object with the specified object.
              *
-             * This method creates a new object with the given ID and adds it to the collection.
+             * This method creates a new object with the given object and adds it to the collection.
              *
-             * @param id The unique identifier of the object.
+             * @tparam T The object to add.
              * @return A reference to the newly added object.
              */
-            object_t& add_object(uint32_t id);
+            template <class T>
+            object_t& add_object();
 
         public:
             /**
@@ -92,3 +93,11 @@ namespace H2DE
             objects_t m_objects; /**< Collection of game objects */
     };
 };  // namespace H2DE
+
+template <class T>
+inline H2DE::object_t& H2DE::ObjectManager::add_object() {
+    auto object = std::make_shared<T>();
+    object->m_id = m_objects.size();  //! USE ID MANAGEMENT
+    m_objects.push_back(object);
+    return m_objects.back();
+}

@@ -4,11 +4,6 @@
 
 #include "H2DE/Exceptions/Exceptions.hpp"
 
-H2DE::object_t& H2DE::ObjectManager::add_object(uint32_t id) {
-    m_objects.push_back(std::shared_ptr<Object>(new Object(id)));
-    return m_objects.back();
-}
-
 H2DE::object_t& H2DE::ObjectManager::get_object(uint32_t id) {
     for (auto& object : m_objects) {
         if (object->get_id() == id) {

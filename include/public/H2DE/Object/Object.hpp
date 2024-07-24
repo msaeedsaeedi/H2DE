@@ -26,15 +26,13 @@ namespace H2DE
         public:
             friend class ObjectManager;
 
-        private:
+        protected:
             /**
-             * @brief Constructs an Object with a specified ID.
+             * @brief Default constructor.
              *
-             * This constructor initializes the Object with a unique ID.
-             *
-             * @param _id The unique identifier of the object.
+             * This constructor initializes the Object.
              */
-            Object(uint32_t _id);
+            Object();
 
         public:
             /**

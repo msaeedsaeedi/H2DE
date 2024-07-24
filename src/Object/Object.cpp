@@ -1,6 +1,6 @@
 #include "H2DE/Object/Object.hpp"
 
-H2DE::Object::Object(uint32_t _id) : m_id(_id) {
+H2DE::Object::Object() {
     m_active = true;
 }
 
