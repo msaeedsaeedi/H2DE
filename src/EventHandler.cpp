@@ -9,11 +9,13 @@ struct H2DE::EventHandler::Impl {
 
         std::unordered_map<WindowEventType, std::vector<window_callback_t>> window_callbacks;
         std::unordered_map<Key, std::vector<keyboard_callback_t>> keyboard_callbacks;
+        std::unordered_map<Key, std::vector<keyboard_callback_t>> keyboard_live_callbacks;
         std::unordered_map<MouseEventType, std::vector<mouse_callback_t>> mouse_callbacks;
         std::vector<std::pair<std::string, text_callback_t>> text_callbacks;
 
         void process_window_events(const sf::Event& event);
-        void process_key_events();
+        void process_key_events(const sf::Event& event);
+        void process_live_key_events();
         void process_mouse_events(const sf::Event& event);
         void process_text_events(const sf::Event& event);
 };
@@ -28,10 +30,11 @@ void H2DE::EventHandler::process_events() {
     sf::Event event;
     while (impl->m_window->pollEvent(event)) {
         impl->process_window_events(event);
+        impl->process_key_events(event);
         impl->process_mouse_events(event);
         impl->process_text_events(event);
     }
-    impl->process_key_events();
+    impl->process_live_key_events();
 }
 
 void H2DE::EventHandler::Impl::process_window_events(const sf::Event& event) {
@@ -48,8 +51,8 @@ void H2DE::EventHandler::Impl::process_window_events(const sf::Event& event) {
     }
 }
 
-void H2DE::EventHandler::Impl::process_key_events() {
-    for (const auto& [key, callbacks] : keyboard_callbacks) {
+void H2DE::EventHandler::Impl::process_live_key_events() {
+    for (const auto& [key, callbacks] : keyboard_live_callbacks) {
         if (sf::Keyboard::isKeyPressed(static_cast<sf::Keyboard::Key>(key))) {
             for (const auto& callback : callbacks) {
                 callback(KeyState::PRESSED);
@@ -58,6 +61,20 @@ void H2DE::EventHandler::Impl::process_key_events() {
             for (const auto& callback : callbacks) {
                 callback(KeyState::RELEASED);
             }
+        }
+    }
+}
+void H2DE::EventHandler::Impl::process_key_events(const sf::Event& event) {
+    auto key = static_cast<Key>(event.key.code);
+    const auto& callbacks = keyboard_callbacks[key];
+    for (const auto& callback : callbacks) {
+        switch (event.type) {
+            case sf::Event::KeyPressed:
+                callback(KeyState::PRESSED);
+                break;
+            case sf::Event::KeyReleased:
+                callback(KeyState::RELEASED);
+                break;
         }
     }
 }
@@ -101,8 +118,11 @@ void H2DE::EventHandler::listen_window_events(const WindowEventType& type, const
     getImpl()->window_callbacks[type].push_back(callback);
 }
 
-void H2DE::EventHandler::listen_keyboard(const Key& key, const keyboard_callback_t& callback) noexcept {
-    getImpl()->keyboard_callbacks[key].push_back(callback);
+void H2DE::EventHandler::listen_keyboard(const Key& key, const keyboard_callback_t& callback, bool live) noexcept {
+    if (live)
+        getImpl()->keyboard_live_callbacks[key].push_back(callback);
+    else
+        getImpl()->keyboard_callbacks[key].push_back(callback);
 }
 
 void H2DE::EventHandler::listen_mouse(const MouseEventType& type, const mouse_callback_t& callback) noexcept {

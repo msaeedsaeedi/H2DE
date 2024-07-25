@@ -73,8 +73,10 @@ namespace H2DE
              *
              * @param key The key for which the event should be handled.
              * @param callback The callback function to handle the event.
+             * @param live A flag indicating whether the event should be handled in real-time.
              */
-            static void listen_keyboard(const Key& key, const keyboard_callback_t& callback) noexcept;
+            static void listen_keyboard(const Key& key, const keyboard_callback_t& callback,
+                                        bool live = false) noexcept;
 
         public:
             /**
