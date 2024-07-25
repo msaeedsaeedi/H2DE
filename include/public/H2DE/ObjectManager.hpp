@@ -53,8 +53,8 @@ namespace H2DE
              * @tparam T The object to add.
              * @return A reference to the newly added object.
              */
-            template <class T>
-            object_t& add_object();
+            template <class T, class... Args>
+            object_t& add_object(Args&&... args);
 
         public:
             /**
@@ -94,9 +94,9 @@ namespace H2DE
     };
 };  // namespace H2DE
 
-template <class T>
-inline H2DE::object_t& H2DE::ObjectManager::add_object() {
-    auto object = std::make_shared<T>();
+template <class T, class... Args>
+inline H2DE::object_t& H2DE::ObjectManager::add_object(Args&&... args) {
+    auto object = std::make_shared<T>(std::forward<Args>(args)...);
     object->m_id = m_objects.size();  //! USE ID MANAGEMENT
     m_objects.push_back(object);
     return m_objects.back();
