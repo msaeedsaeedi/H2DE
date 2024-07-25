@@ -60,6 +60,11 @@ void Engine::run() {
         H2DE::EventHandler::process_events();
         current_scene->m_delta = delta_time.count();
         current_scene->update();
+        const auto objects = current_scene->m_object_manager->get_all();
+        for (const auto object : objects) {
+            object->update(current_scene->m_delta);
+        }
+        H2DE::EventHandler::process_events();
         getImpl()->m_render_engine->render();
     }
 }

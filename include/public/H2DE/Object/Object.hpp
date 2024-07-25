@@ -42,6 +42,16 @@ namespace H2DE
 
         public:
             /**
+             * @brief Updates the object.
+             *
+             * This method updates the object with the specified delta time.
+             *
+             * @param delta The time elapsed since the last update.
+             */
+            virtual void update(const float delta) = 0;
+
+        public:
+            /**
              * @brief Marks the object for destruction.
              */
             void destroy() noexcept;
