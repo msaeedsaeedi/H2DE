@@ -1,67 +1,12 @@
 #pragma once
 
-#include <functional>
 #include <memory>
-#include <variant>
 
 #include "H2DE/Events/Events.hpp"
 #include "H2DE/Events/Keys.hpp"
 
 namespace H2DE
 {
-    /**
-     * @typedef window_resize_callback_t
-     * @brief Alias for a callback function that handles window resize events.
-     */
-    using window_resize_callback_t = std::function<void(const int, const int)>;
-
-    /**
-     * @typedef window_default_callback_t
-     * @brief Alias for a callback function that handles default window events.
-     */
-    using window_default_callback_t = std::function<void()>;
-
-    /**
-     * @typedef window_callback_t
-     * @brief Alias for a variant of window event callback functions.
-     */
-    using window_callback_t = std::variant<window_default_callback_t, window_resize_callback_t>;
-
-    /**
-     * @typedef keyboard_callback_t
-     * @brief Alias for a callback function that handles keyboard events.
-     */
-    using keyboard_callback_t = std::function<void(const H2DE::KeyState&)>;
-
-    /**
-     * @typedef mouse_move_callback_t
-     * @brief Alias for a callback function that handles mouse move events.
-     */
-    using mouse_move_callback_t = std::function<void(const int, const int)>;
-
-    /**
-     * @typedef mouse_key_callback_t
-     * @brief Alias for a callback function that handles mouse key events.
-     */
-    using mouse_key_callback_t = std::function<void(const H2DE::KeyState&)>;
-
-    /**
-     * @typedef mouse_scroll_callback_t
-     * @brief Alias for a callback function that handles mouse scroll events.
-     */
-    using mouse_scroll_callback_t = std::function<void(const float)>;
-
-    /**
-     * @typedef mouse_callback_t
-     * @brief Alias for a variant of mouse event callback functions.
-     */
-    using mouse_callback_t = std::variant<mouse_move_callback_t, mouse_key_callback_t, mouse_scroll_callback_t>;
-
-    /**
-     * @typedef text_callback_t
-     * @brief Alias for a callback function that handles text input events.
-     */
-    using text_callback_t = std::function<void(const std::string&)>;
 
     /**
      * @class EventHandler
