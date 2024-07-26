@@ -1,5 +1,7 @@
 #include "H2DE/AssetManager.hpp"
 
+#include "H2DE/Exceptions/IOExceptions.hpp"
+
 std::vector<sf::Texture> &H2DE::AssetManager::get_textures() {
     static std::vector<sf::Texture> m_textures;
     return m_textures;

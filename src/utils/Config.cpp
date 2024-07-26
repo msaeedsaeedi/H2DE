@@ -2,7 +2,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <stdexcept>
 
 #include "H2DE/Exceptions/IOExceptions.hpp"
 

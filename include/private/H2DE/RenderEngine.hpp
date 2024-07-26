@@ -2,9 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include <vector>
-
-#include "H2DE/Object/Object.hpp"
 
 namespace H2DE
 {

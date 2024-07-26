@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <string>
 #include <variant>
 
 namespace H2DE
